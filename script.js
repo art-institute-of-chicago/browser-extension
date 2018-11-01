@@ -3,20 +3,25 @@ Last updated 11/1/18
 This is the JavaScript document for the AIC New Tab Chrome Extension */
 
 /*
-Print salutation based on time (e.g. good morning if AM)
+Print salutation based on time (e.g. good morning if AM, good afternoon if early PM, good evening if later, decide when to divide good evening/good night)
 Get local date and print in format [Day (name), Month day(date)] (e.g. Thursday, November 1st)
 Print local time
 */
 
 /* Query AIC API for image
-Choose random image from database of images allowed based on CC0 Public Domain Designation tags
-Set up container for images (unsure if that's JS or other doc)
-Pull title and artist info for tombstone
-Print tombstone in bottom left region of page 
+ * Artworks endpoint: URL to hit to get data about artworks
+ * Going to be using search endpoint to get info and images of artworks
+ * Query the Datahub and search for random artworks, filtering by CC0 public domain
+ * Obtaining "title", "date_display", and "artist_title" fields
+ * Obtain image link, construct IIIF image link based on image ID
+ * Once tombstone info is retrieved, format tombstone 
+ * Set up container for images (unsure if that's JS or other doc)
+ * Print tombstone in bottom left region of page 
 */
 
 /* Place download button near image
-When button is pressed, download image using user's browser
+ * Construct download link using image ID
+ * When button is pressed, download image using user's browser
 */
 
 

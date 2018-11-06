@@ -1,5 +1,5 @@
 /* Abdur Khan 
-Last updated 11/1/18
+Last updated 11/6/18
 This is the JavaScript document for the AIC New Tab Chrome Extension */
 
 /*

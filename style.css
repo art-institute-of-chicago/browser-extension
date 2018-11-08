@@ -2,11 +2,15 @@
 Last updated 11/8/18
 This is the CSS style page for the AIC Google Chrome New Tab Extension */
 
+@font-face {
+	font-family: "Ideal Sans";
+	src: url("IdealSans-Light-Pro.otf");
+}
 body {
 	background-color: #FFFFFF;
 }
 
-#img {
+#artwork {
 	width: 70%;
 	align-content: center;
 	margin-right: 25%;
@@ -47,6 +51,7 @@ img {
 
 a:link {
     text-decoration: none;
+    color: black;
 }
 
 a:visited {
@@ -54,17 +59,12 @@ a:visited {
     text-decoration: none;
 }
 
-#logo {
+#logo img {
+	width: 10%;
+	height: auto;
    	position: absolute;
    	top: 16px;
    	right: 16px;
-}
-
-img.a {
-	width: inherit;
-	height: auto;
-	align-content: center;
-	vertical-align: middle;
 }
 
 

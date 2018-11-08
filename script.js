@@ -1,5 +1,5 @@
 /* Abdur Khan 
-Last updated 11/6/18
+Last updated 11/8/18
 This is the JavaScript document for the AIC New Tab Chrome Extension */
 
 /*
@@ -7,6 +7,20 @@ Print salutation based on time (e.g. good morning if AM, good afternoon if early
 Get local date and print in format [Day (name), Month day(date)] (e.g. Thursday, November 1st)
 Print local time
 */
+
+function printDate() {
+    var greeting;
+    var time = new Date().getHours();
+    if (time < 12) {
+        greeting = "Good morning";
+    } else if (time < 17) {
+        greeting = "Good afternoon";
+    } else {
+        greeting = "Good evening";
+    }
+    document.getElementById("demo").innerHTML = greeting;
+}
+
 
 /* Query AIC API for image
  * Artworks endpoint: URL to hit to get data about artworks

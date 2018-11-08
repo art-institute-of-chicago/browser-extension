@@ -1,15 +1,18 @@
 /* Abdur Khan
-Last updated 11/6/18
+Last updated 11/8/18
 This is the CSS style page for the AIC Google Chrome New Tab Extension */
 
 body {
 	background-color: #FFFFFF;
 }
 
-div.a {
-	width: 75%;
-	margin: auto;
+#img {
+	width: 70%;
 	align-content: center;
+	margin-right: 25%;
+	margin-left: 25%;
+	margin-top: 2%;
+	margin-bottom: 2%
 	vertical-align: middle;
 }
 
@@ -17,19 +20,53 @@ img {
 	width: inherit;
 	height: auto;
 	align-content: center;
+}
+
+#salutation {
+	font-family: "Ideal Sans", Ideal, sansserif;
+	line-height: 80%;
+	position: absolute;
+	top: 2%;
+	left: 1%;
+}
+
+#tombstone {
+	font-family: "Ideal Sans", Ideal, sansserif;
+	line-height: 80%;
+	position: absolute;
+	bottom: 2%;
+	left: 1%;
+}
+
+#copyright {
+	font-family: "Ideal Sans", Ideal, sansserif;
+	position: absolute;
+	bottom: 2%;
+	right: 1%;
+}
+
+a:link {
+    text-decoration: none;
+}
+
+a:visited {
+    color: black;
+    text-decoration: none;
+}
+
+#logo {
+   	position: absolute;
+   	top: 16px;
+   	right: 16px;
+}
+
+img.a {
+	width: inherit;
+	height: auto;
+	align-content: center;
 	vertical-align: middle;
 }
 
-div.b {
-	font-family: "Ideal Sans", Ideal, sansserif;
-	line-height: 80%;
-}
-
-div.c {
-	font-family: "Ideal Sans", Ideal, sansserif;
-	color: #7F7F7F
-	align-content: right;
-}
 
 /* Salutation and title font: Sabon, black;
 Everything else: Ideal Sans Light, gray #7F7F7F;

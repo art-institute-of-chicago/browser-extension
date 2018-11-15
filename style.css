@@ -4,7 +4,7 @@ This is the CSS style page for the AIC Google Chrome New Tab Extension */
 
 @font-face {
 	font-family: "Ideal Sans";
-	src: url("IdealSans-Light-Pro.otf");
+	src: url("assets/IdealSans-Light-Pro.otf");
 }
 body {
 	background-color: #FFFFFF;
@@ -12,10 +12,10 @@ body {
 
 #artwork {
 	width: 70%;
-	align-content: center;
+	align-content: left;
 	margin-right: 25%;
 	margin-left: 25%;
-	margin-top: 2%;
+	margin-top: 5%;
 	margin-bottom: 2%
 	vertical-align: middle;
 }

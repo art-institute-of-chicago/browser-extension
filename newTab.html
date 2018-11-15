@@ -9,19 +9,30 @@
 	<body>
 		<!-- container for salutation and date -->
 		<div id="salutation">
-			<p id="demo">Lorem Ipsum</p>
+			<p id="demo">If you're reading this</p>
+			<p id="time">It's too late</p>
 		</div>
 		<script>
 			printDate();
 		</script>
 		<!-- container for image -->
 		<div id = "artwork">
-			<img src = "bay_marseille.jpeg" alt="image of painting 'The Bay of Marseille, seen from L'Estaque" by Paul Cézanne.>
+			<script>
+				randomImage(imgArray);
+			</script>
 		</div>
 		<!-- container for tombstone -->
 		<div id = "tombstone">
-			<p>The Bay of Marseille, Seen from L'Estaque, 1885</p>
-			<p>Paul Cézanne</p>
+			<p>
+				<script>
+					tombstone();
+				</script>
+			</p>
+			<p>
+				<script>
+					artist();
+				</script>
+			</p>
 		</div>
 		<!-- Copyright info -->
 		<div id = "copyright">
@@ -30,7 +41,7 @@
 		<!-- Container for logo -->
 		<div id = "logo">
 		<a href="https://www.artic.edu/" target="_blank">
-			<img src = "AIClogo.png" alt="Art Institvte Chicago logo outlined in black on white background">
+			<img src = "assets/AIClogo.png" alt="Art Institvte Chicago logo outlined in black on white background">
 		</a>
 		</div>
 	</body>

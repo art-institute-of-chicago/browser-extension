@@ -62,12 +62,8 @@ a:visited {
     text-decoration: none;
 }
 
-#logo img {
-<<<<<<< HEAD
-	width: 8%;
-=======
-	width: 5%;
->>>>>>> 41acc30a52d45cc1ef01699a7dc244b691db5e19
+#logo {
+	width: 8%
 	height: auto;
    	position: absolute;
    	top: 2%;

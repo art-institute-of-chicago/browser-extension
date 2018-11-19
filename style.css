@@ -1,23 +1,26 @@
 /* Abdur Khan
-Last updated 11/8/18
+Last updated 11/19/18
 This is the CSS style page for the AIC Google Chrome New Tab Extension */
 
 @font-face {
 	font-family: "Ideal Sans";
-	src: url("IdealSans-Light-Pro.otf");
-}
-body {
-	background-color: #FFFFFF;
+	src: url("assets/IdealSans-Light-Pro.otf");
 }
 
 #artwork {
+	position: relative;
 	width: 70%;
-	align-content: center;
+	align-content: left;
 	margin-right: 25%;
 	margin-left: 25%;
-	margin-top: 2%;
+	margin-top: 5%;
 	margin-bottom: 2%
 	vertical-align: middle;
+}
+
+#download {
+	position: absolute;
+	display: inline-block;
 }
 
 img {
@@ -50,8 +53,8 @@ img {
 }
 
 a:link {
-    text-decoration: none;
     color: black;
+    text-decoration: none;
 }
 
 a:visited {
@@ -60,11 +63,16 @@ a:visited {
 }
 
 #logo img {
+<<<<<<< HEAD
 	width: 8%;
+=======
+	width: 5%;
+>>>>>>> 41acc30a52d45cc1ef01699a7dc244b691db5e19
 	height: auto;
    	position: absolute;
-   	top: 16px;
-   	right: 16px;
+   	top: 2%;
+   	right: 1%;
+   	border: 1px solid black;
 }
 
 

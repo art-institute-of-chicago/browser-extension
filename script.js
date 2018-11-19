@@ -93,17 +93,3 @@ function artist() {
  * Construct download link using image ID
  * When button is pressed, download image using user's browser
 */
-
-
-/* function createParagraph() {
-  var para = document.createElement('p');
-  para.textContent = 'You clicked the button!';
-  document.body.appendChild(para);1
-}
-
-var buttons = document.querySelectorAll('button');
-
-for(var i = 0; i < buttons.length ; i++) {
-  buttons[i].addEventListener('click', createParagraph);
-}
-*/

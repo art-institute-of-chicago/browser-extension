@@ -29,14 +29,6 @@ img {
 	align-content: center;
 }
 
-#salutation {
-	font-family: "Ideal Sans", Ideal, sansserif;
-	line-height: 80%;
-	position: absolute;
-	top: 2%;
-	left: 1%;
-}
-
 #tombstone {
 	font-family: "Ideal Sans", Ideal, sansserif;
 	line-height: 80%;

@@ -8,20 +8,6 @@ Get local date and print in format [Day (name), Month day(date)] (e.g. Thursday,
 Print local time
 */
 // Print greeting based on time
-function printDate() {
-    var greeting;
-    var time = new Date().getHours();
-    if (time < 12) {
-        greeting = "Good morning";
-    } else if (time < 17) {
-        greeting = "Good afternoon";
-    } else {
-        greeting = "Good evening";
-    }
-    var printTime = new Date();
-    document.getElementById("demo").innerHTML = greeting;
-    document.getElementById("time").innerHTML = printTime.toDateString();
-}
 
 // Array to test random function
 var imgArray = ["bay_marseille.jpeg", 

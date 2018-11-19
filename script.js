@@ -1,5 +1,5 @@
 /* Abdur Khan 
-Last updated 11/8/18
+Last updated 11/19/18
 This is the JavaScript document for the AIC New Tab Chrome Extension */
 
 /*
@@ -18,9 +18,9 @@ function printDate() {
     } else {
         greeting = "Good evening";
     }
-    //var printTime = new Date().get
+    var printTime = new Date();
     document.getElementById("demo").innerHTML = greeting;
-    //document.getElementByID("time").innerHTML = 
+    document.getElementById("time").innerHTML = printTime.toDateString();
 }
 
 // Array to test random function
@@ -65,12 +65,13 @@ function randomImage(imgBank, path) {
     document.write(imgPath); document.close();
 }
 
-
+// Print title in tombstone
 function tombstone() {
     var tombstone = titleArray[imgIndex];
     document.write(tombstone); document.close();
 }
 
+// Print artist in tombstone
 function artist() {
   var artist = artistArray[imgIndex];
   document.write(artist); document.close();

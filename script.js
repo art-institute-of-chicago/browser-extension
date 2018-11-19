@@ -63,6 +63,17 @@ function artist() {
   document.write(artist); document.close();
 }
 
+function getArtworkData() {
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        var myObj = JSON.parse(this.responseText);
+        document.getElementById("artwork").innerHTML = myObj.name;
+    }
+    };
+xmlhttp.open("GET", "json_demo.txt", true);
+xmlhttp.send();
+}
 
 /* Query AIC API for image
  * Artworks endpoint: URL to hit to get data about artworks

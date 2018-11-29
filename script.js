@@ -63,6 +63,66 @@ function artist() {
   document.write(artist); document.close();
 }
 
+function getArtworkData() {
+    var xmlhttp = new XMLHttpRequest();
+    var dataHubURL = 'http://aggregator-data-test.artic.edu/api/v1/search';
+    xmlhttp.open("POST", dataHubURL, true);
+    xmlhttp.setRequestHeader('Content-Type', 'application/json');
+    xmlhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        var myObj = JSON.parse(this.responseText);
+        console.log('myObj', myObj);
+        }
+    };
+
+    //how often the randomness should work
+    let timeStamp = Math.floor(Date.now() / 1000);
+
+    console.log(timeStamp);
+
+    let artworkRequest = {
+    "resources": "artworks",
+    "fields": [
+    "id",
+    "title",
+    "artist_display",
+    "image_id",
+    "date_display"
+    ],
+    "boost": false,
+    "limit": 1,
+    "query": {
+        "function_score": {
+            "query": {
+                "bool": {
+                    "must": [
+                        {
+                            "term": {
+                                "is_public_domain": true
+                            }
+                        },
+                        {
+                            "exists": {
+                                "field": "image_id"
+                            }
+                        }
+                    ]
+                }
+            },
+            "random_score": {
+                "field": "id",
+                "seed": timeStamp
+            }
+        }
+    }
+};
+
+    let artworkRequest2 = JSON.stringify(artworkRequest);
+    //dataHubURL = dataHubURL + artworkRequest;*/
+    xmlhttp.send(artworkRequest2);
+
+}
+
 
 /* Query AIC API for image
  * Artworks endpoint: URL to hit to get data about artworks

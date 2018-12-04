@@ -59,8 +59,9 @@ function tombstone() {
 
 // Print artist in tombstone
 function artist() {
-  var artist = artistArray[imgIndex];
-  document.write(artist); document.close();
+    getArtworkData();
+    var artist = artistPrint;
+    document.write(artist); document.close();
 }
 
 function getArtworkData() {
@@ -72,6 +73,9 @@ function getArtworkData() {
     if (this.readyState == 4 && this.status == 200) {
         var myObj = JSON.parse(this.responseText);
         console.log('myObj', myObj);
+        console.log(myObj.data[0].artist_display);
+        var artistPrint = myObj.data[0].artist_display;
+        document.getElementById("tombstone").innerHTML = artistPrint;
         }
     };
 
@@ -120,6 +124,8 @@ function getArtworkData() {
     let artworkRequest2 = JSON.stringify(artworkRequest);
     //dataHubURL = dataHubURL + artworkRequest;*/
     xmlhttp.send(artworkRequest2);
+
+
 
 }
 

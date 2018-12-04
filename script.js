@@ -1,5 +1,5 @@
 /* Abdur Khan
-Last updated 11/19/18
+Last updated 12/4/18
 This is the JavaScript document for the AIC New Tab Chrome Extension */
 
 /*
@@ -75,7 +75,12 @@ function getArtworkData() {
         console.log('myObj', myObj);
         console.log(myObj.data[0].artist_display);
         var artistPrint = myObj.data[0].artist_display;
-        document.getElementById("tombstone").innerHTML = artistPrint;
+        document.getElementById("artist").innerHTML = artistPrint;
+        var titlePrint = myObj.data[0].title;
+        document.getElementById("tombstone").innerHTML = titlePrint;
+        var imageID = myObj.data[0].image_id;
+        var imageLink = ;
+        document.getElementById("artwork").innerHTML = imageLink;
         }
     };
 

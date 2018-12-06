@@ -19,9 +19,9 @@ This is the CSS style page for the AIC Google Chrome New Tab Extension */
 }
 
 #download {
-	position: absolute;
-	display: inline-block;
-	float: right;
+	position: relative;
+	top: 700px;
+	left: 1450px;
 }
 
 img {

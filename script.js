@@ -1,5 +1,5 @@
 /* Abdur Khan 
-Last updated 12/4/18
+Last updated 12/6/18
 This is the JavaScript document for the AIC New Tab Chrome Extension */
 
 /*
@@ -79,7 +79,8 @@ function getArtworkData() {
         var titlePrint = myObj.data[0].title;
         document.getElementById("tombstone").innerHTML = titlePrint;
         var imageID = myObj.data[0].image_id;
-        var imageLink = ;
+        var imageLink = '<img src = ' + '"https://www.artic.edu/iiif/2/' + imageID + '/full/600,/0/default.jpg">'
+        console.log(imageLink);
         document.getElementById("artwork").innerHTML = imageLink;
         }
     };

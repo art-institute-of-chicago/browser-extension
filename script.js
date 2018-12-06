@@ -18,7 +18,7 @@ function getArtworkData() {
         var titlePrint = myObj.data[0].title;
         document.getElementById("tombstone").innerHTML = titlePrint;
         var imageID = myObj.data[0].image_id;
-        var imageLink = '<img src = ' + '"https://www.artic.edu/iiif/2/' + imageID + '/full/846,/0/default.jpg">'
+        var imageLink = '<img src = ' + '"https://www.artic.edu/iiif/2/' + imageID + '/full/600,/0/default.jpg">'
         document.getElementById("artwork").innerHTML = imageLink;
         //use ID to generate artwork link on artic page
         //get browser dimensions to get appropriate width and height?
@@ -57,16 +57,22 @@ function getArtworkData() {
                             "exists": {
                                 "field": "image_id"
                             }
-
                         },
-                            {
+                        {
+                            "term" : {
+                                "thumbnail.width": 3000
+                                
+                            }
+                        },
+                        {
                             "range": {
-                                "thumbnail.width": {
+                                "thumbnail.height": {
                                     "gte": 1575,
-                                    "lte": 2175,
+                                    "lte": 2175
                                 }
                             }
                         }
+
                     ]
                 }
             },

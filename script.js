@@ -1,5 +1,5 @@
 /* Abdur Khan 
-Last updated 12/6/18
+Last updated 12/11/18
 This is the JavaScript document for the AIC New Tab Chrome Extension */
 
 
@@ -21,6 +21,9 @@ function getArtworkData() {
         var imageID = myObj.data[0].image_id;
         var imageLink = '<img src = ' + '"https://www.artic.edu/iiif/2/' + imageID + '/full/600,/0/default.jpg">'
         document.getElementById("artwork").innerHTML = imageLink;
+        var webID = myObj.data[0].id;
+        var webLink = '<a href = ' + '"https://www.artic.edu/artworks/' + webID + '"/>'
+        document.getElementById("weblink").innerHTML = webLink;
         //use ID to generate artwork link on artic page
         //get browser dimensions to get appropriate width and height?
         //var downloadLink = '<a href = ' + '"https://www.artic.edu/iiif/2/' + imageID + '/full/600,/0/default.jpg" download>'

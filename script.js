@@ -17,13 +17,19 @@ function getArtworkData() {
         document.getElementById("artist").innerHTML = artistPrint;
         var titlePrint = myObj.data[0].title;
         document.getElementById("tombstone").innerHTML = titlePrint;
+        //use ID to generate artwork link
         var imageID = myObj.data[0].image_id;
-        var imageLink = '<img src = ' + '"https://www.artic.edu/iiif/2/' + imageID + '/full/600,/0/default.jpg">'
+        var windowWidth = window.innerWidth;
+        var windowHeight = window.innerHeight;
+        console.log("this window is" + windowWidth + "x" + windowHeight)
+        //seeds available - 800 and 1200 for now
+        var imageWidth = 800;
+        if (windowWidth > 800) {
+            imageWidth = 1200;
+        }
+            console.log(imageWidth);
+        var imageLink = '<img src = ' + '"https://www.artic.edu/iiif/2/' + imageID + '/full/' + imageWidth + ',/0/default.jpg">'
         document.getElementById("artwork").innerHTML = imageLink;
-        var webID = myObj.data[0].id;
-        var webLink = '<a href = ' + '"https://www.artic.edu/artworks/' + webID + '"/>'
-        document.getElementById("weblink").innerHTML = webLink;
-        //use ID to generate artwork link on artic page
         //get browser dimensions to get appropriate width and height?
         //var downloadLink = '<a href = ' + '"https://www.artic.edu/iiif/2/' + imageID + '/full/600,/0/default.jpg" download>'
         //document.getElementById("download").innerHTML = downloadLink;

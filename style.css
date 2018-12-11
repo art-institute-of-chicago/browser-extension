@@ -9,19 +9,17 @@ This is the CSS style page for the AIC Google Chrome New Tab Extension */
 
 #artwork {
 	position: absolute;
-	width: 70%;
+	width: 80%;
 	align-content: left;
-	margin-right: 25%;
-	margin-left: 25%;
-	margin-top: 5%;
-	margin-bottom: 2%
+	margin-left: 18%;
+	margin-top: 0%;
 	vertical-align: middle;
 }
 
 #download {
-	position: relative;
-	top: 700px;
-	left: 1450px;
+	position: absolute;
+	margin-left: 85%;
+	bottom: 15%;
 }
 
 img {

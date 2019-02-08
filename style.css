@@ -70,6 +70,10 @@ a:visited {
    	border: 1px solid black;
 }
 
+.big {
+	font-size: 20px;
+}
+
 
 /* Salutation and title font: Sabon, black;
 Everything else: Ideal Sans Light, gray #7F7F7F;

@@ -2,6 +2,7 @@
 Last updated 12/11/18
 This is the JavaScript document for the AIC New Tab Chrome Extension */
 
+getArtworkData();
 
 function getArtworkData() {
     var xmlhttp = new XMLHttpRequest();

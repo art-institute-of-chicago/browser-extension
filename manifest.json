@@ -1,0 +1,17 @@
+{
+  "manifest_version": 2,
+  "name": "Art Institute of Chicago: Art Tab",
+  "description": "Explore the Art Institute of Chicago's Collection",
+  "version": "1",
+  "author": "AIC",
+  "browser_action": {
+    "default_icon": "aicLogo.png",
+    "default_title": "Art Institute of Chicago"
+  },
+  "chrome_url_overrides": {
+    "newtab": "newtab.html"
+  },
+  "permissions": [
+    "activeTab"
+  ]
+}

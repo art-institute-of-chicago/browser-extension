@@ -32,8 +32,9 @@ function getArtworkData() {
         var imageLink = '<img src = ' + '"https://www.artic.edu/iiif/2/' + imageID + '/full/' + imageWidth + ',/0/default.jpg">'
         document.getElementById("artwork").innerHTML = imageLink;
         //get browser dimensions to get appropriate width and height?
-        //var downloadLink = '<a href = ' + '"https://www.artic.edu/iiif/2/' + imageID + '/full/600,/0/default.jpg" download>'
-        //document.getElementById("download").innerHTML = downloadLink;
+        var downloadUrl = 'https://www.artic.edu/iiif/2/' + imageID + '/full/3000,/0/default.jpg'
+        document.getElementById("download-link").setAttribute('href', downloadUrl);
+        document.getElementById("download-link").setAttribute('download', titlePrint + '.jpg');
         }
     };
 

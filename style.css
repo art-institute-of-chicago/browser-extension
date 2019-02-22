@@ -12,9 +12,21 @@ This is the CSS style page for the AIC Google Chrome New Tab Extension */
 }
 
 #download {
-	position: absolute;
-	margin-left: 85%;
-	bottom: 15%;
+    position: absolute;
+    margin-left: 85%;
+    bottom: 15%;
+    width: 48px;
+    height: 48px;
+    text-align: center;
+    transition-property: color,background-color,border-color,opacity;
+    transition-duration: .15s;
+    transition-timing-function: ease-in-out;
+    cursor: pointer;
+    background-color: rgba(0,0,0,.5);
+}
+
+#download:hover {
+    background-color: rgba(0,0,0,.6);
 }
 
 img {
@@ -69,6 +81,15 @@ a:visited {
 	font-size: 20px;
 }
 
+.button-icon {
+    top: 24px;
+    position: relative;
+    margin: -1px auto 0;
+    transform: translateY(-50%);
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+}
 
 /* Salutation and title font: Sabon, black;
 Everything else: Ideal Sans Light, gray #7F7F7F;

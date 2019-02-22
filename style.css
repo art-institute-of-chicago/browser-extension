@@ -2,11 +2,6 @@
 Last updated 12/10/18
 This is the CSS style page for the AIC Google Chrome New Tab Extension */
 
-@font-face {
-	font-family: "Ideal Sans";
-	src: url("assets/IdealSans-Light-Pro.otf");
-}
-
 #artwork {
 	position: absolute;
 	width: 80%;
@@ -29,7 +24,7 @@ img {
 }
 
 #tombstone {
-	font-family: "Ideal Sans", Ideal, sansserif;
+	font-family: 'Open Sans', sans-serif;
 	line-height: 80%;
 	position: absolute;
 	bottom: 5%;
@@ -37,7 +32,7 @@ img {
 }
 
 #artist {
-	font-family: "Ideal Sans", Ideal, sansserif;
+	font-family: 'Open Sans', sans-serif;
 	line-height: 80%;
 	position: absolute;
 	bottom: 2%;
@@ -45,7 +40,7 @@ img {
 }
 
 #copyright {
-	font-family: "Ideal Sans", Ideal, sansserif;
+	font-family: 'Open Sans', sans-serif;
 	position: absolute;
 	bottom: 1%;
 	right: 1%;

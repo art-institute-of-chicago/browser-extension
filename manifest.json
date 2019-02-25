@@ -5,7 +5,7 @@
   "version": "1",
   "author": "AIC",
   "browser_action": {
-    "default_icon": "aicLogo.png",
+    "default_icon": "assets/aicLogo.png",
     "default_title": "Art Institute of Chicago"
   },
   "chrome_url_overrides": {

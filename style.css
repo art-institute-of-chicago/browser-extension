@@ -1,14 +1,10 @@
-/* Abdur Khan
-Last updated 12/10/18
-This is the CSS style page for the AIC Google Chrome New Tab Extension */
-
 #artwork {
-	position: absolute;
-	width: 80%;
-	align-content: left;
-	margin-left: 18%;
-	margin-top: 0%;
-	vertical-align: middle;
+    position: absolute;
+    width: 80%;
+    align-content: left;
+    margin-left: 18%;
+    margin-top: 0%;
+    vertical-align: middle;
 }
 
 #download {
@@ -30,32 +26,32 @@ This is the CSS style page for the AIC Google Chrome New Tab Extension */
 }
 
 img {
-	width: inherit;
-	height: auto;
-	align-content: center;
+    width: inherit;
+    height: auto;
+    align-content: center;
 }
 
 #tombstone {
-	font-family: 'Open Sans', sans-serif;
-	line-height: 80%;
-	position: absolute;
-	bottom: 5%;
-	left: 1%;
+    font-family: 'Open Sans', sans-serif;
+    line-height: 80%;
+    position: absolute;
+    bottom: 5%;
+    left: 1%;
 }
 
 #artist {
-	font-family: 'Open Sans', sans-serif;
-	line-height: 80%;
-	position: absolute;
-	bottom: 2%;
-	left: 1%;
+    font-family: 'Open Sans', sans-serif;
+    line-height: 80%;
+    position: absolute;
+    bottom: 2%;
+    left: 1%;
 }
 
 #copyright {
-	font-family: 'Open Sans', sans-serif;
-	position: absolute;
-	bottom: 1%;
-	right: 1%;
+    font-family: 'Open Sans', sans-serif;
+    position: absolute;
+    bottom: 1%;
+    right: 1%;
 }
 
 a:link {
@@ -69,16 +65,12 @@ a:visited {
 }
 
 #logo img {
-	width: 5%;
-	height: auto;
-   	position: absolute;
-   	top: 2%;
-   	right: 1%;
-   	border: 1px solid black;
-}
-
-.big {
-	font-size: 20px;
+    width: 5%;
+    height: auto;
+    position: absolute;
+    top: 2%;
+    right: 1%;
+    border: 1px solid black;
 }
 
 .button-icon {
@@ -90,10 +82,3 @@ a:visited {
     height: 24px;
     cursor: pointer;
 }
-
-/* Salutation and title font: Sabon, black;
-Everything else: Ideal Sans Light, gray #7F7F7F;
-Image centered on page
-AIC Logo top right, salutation top left, tombstone bottom left, copyright bottom right.
-*/
-

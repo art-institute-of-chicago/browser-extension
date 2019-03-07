@@ -43,11 +43,19 @@ a:link, a:visited {
     display: flex;
 }
 
-#download-container #copyright svg {
+#download-container #copyright img {
     height: 36px;
     width: 100px;
 
-    fill: var(--color-gray);
+    transition-property: opacity;
+    transition-duration: .15s;
+    transition-timing-function: ease-in-out;
+
+    opacity: 0.5;
+}
+
+#download-container #copyright img:hover {
+    opacity: 0.6;
 }
 
 #download-container #download-link {
@@ -57,20 +65,20 @@ a:link, a:visited {
     height: 48px;
 
     text-align: center;
-    transition-property: color,background-color,border-color,opacity;
+    cursor: pointer;
+
+    transition-property: background-color;
     transition-duration: .15s;
     transition-timing-function: ease-in-out;
-    cursor: pointer;
-    background-color: rgba(0,0,0,.5);
 
-    fill: white;
+    background-color: rgba(0,0,0,.5);
 }
 
 #download-container #download-link:hover {
     background-color: rgba(0,0,0,.6);
 }
 
-#download-container #download-link svg {
+#download-container #download-link img {
     top: 24px;
     position: relative;
     margin: -1px auto 0;
@@ -96,7 +104,7 @@ a:link, a:visited {
     right: var(--spacing);
 }
 
-#logo svg {
+#logo img {
     width: 78px;
     height: 78px;
 }

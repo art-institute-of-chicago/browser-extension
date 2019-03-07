@@ -12,8 +12,6 @@ function getArtworkData() {
     xmlhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
         var myObj = JSON.parse(this.responseText);
-        console.log('myObj', myObj);
-        console.log(myObj.data[0].artist_display);
         var artistPrint = myObj.data[0].artist_display;
         document.getElementById("artist").innerHTML = artistPrint;
         var titlePrint = myObj.data[0].title;
@@ -22,13 +20,11 @@ function getArtworkData() {
         var imageID = myObj.data[0].image_id;
         var windowWidth = window.innerWidth;
         var windowHeight = window.innerHeight;
-        console.log("this window is" + windowWidth + "x" + windowHeight)
         //seeds available - 800 and 1200 for now
         var imageWidth = 800;
         if (windowWidth > 800) {
             imageWidth = 1200;
         }
-            console.log(imageWidth);
         var imageLink = '<img src = ' + '"https://www.artic.edu/iiif/2/' + imageID + '/full/' + imageWidth + ',/0/default.jpg">'
         document.getElementById("artwork").innerHTML = imageLink;
         //get browser dimensions to get appropriate width and height?
@@ -40,8 +36,6 @@ function getArtworkData() {
 
     //how often the randomness should work
     let timeStamp = Math.floor(Date.now() / 1000);
-
-    console.log(timeStamp);
 
     let artworkRequest = {
     "resources": "artworks",

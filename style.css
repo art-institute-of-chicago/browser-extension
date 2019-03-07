@@ -1,18 +1,48 @@
-#artwork {
-    position: absolute;
-    width: 80%;
-    align-content: left;
-    margin-left: 18%;
-    margin-top: 0%;
-    vertical-align: middle;
+:root {
+    font-family: 'Open Sans', sans-serif;
+    --spacing: 20px;
 }
 
-#download {
+#artwork {
     position: absolute;
-    margin-left: 85%;
-    bottom: 15%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+
+    width: 80%;
+    text-align: center;
+}
+
+#download-container {
+    position: absolute;
+    bottom: var(--spacing);
+    right: var(--spacing);
+
+    display: flex;
+    align-items: center;
+}
+
+#download-container > * {
+    display: block;
+}
+
+#download-container #copyright {
+    display: flex;
+}
+
+#download-container #copyright > * {
+    margin-left: calc(var(--spacing) / 4);
+
+    width: 32px;
+    height: 32px;
+}
+
+#download-container #download-link {
+    margin-left: calc(var(--spacing) / 2);
+
     width: 48px;
     height: 48px;
+
     text-align: center;
     transition-property: color,background-color,border-color,opacity;
     transition-duration: .15s;
@@ -21,7 +51,7 @@
     background-color: rgba(0,0,0,.5);
 }
 
-#download:hover {
+#download-container #download-link:hover {
     background-color: rgba(0,0,0,.6);
 }
 
@@ -32,27 +62,15 @@ img {
 }
 
 #tombstone {
-    font-family: 'Open Sans', sans-serif;
-    line-height: 80%;
     position: absolute;
-    bottom: 5%;
-    left: 1%;
+    bottom: var(--spacing);
+    left: var(--spacing);
 }
 
-#artist {
-    font-family: 'Open Sans', sans-serif;
-    line-height: 80%;
-    position: absolute;
-    bottom: 2%;
-    left: 1%;
+#tombstone #title {
+    margin-bottom: calc(var(--spacing) / 2);
 }
 
-#copyright {
-    font-family: 'Open Sans', sans-serif;
-    position: absolute;
-    bottom: 1%;
-    right: 1%;
-}
 
 a:link {
     color: black;
@@ -64,13 +82,15 @@ a:visited {
     text-decoration: none;
 }
 
-#logo img {
-    width: 5%;
-    height: auto;
+#logo {
     position: absolute;
-    top: 2%;
-    right: 1%;
-    border: 1px solid black;
+    top: var(--spacing);
+    right: var(--spacing);
+}
+
+#logo img {
+    width: 78px;
+    height: auto;
 }
 
 .button-icon {

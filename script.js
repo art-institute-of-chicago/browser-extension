@@ -8,22 +8,25 @@ function getArtworkData() {
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             var myObj = JSON.parse(this.responseText);
+
             var artistPrint = myObj.data[0].artist_display;
             document.getElementById("artist").innerHTML = artistPrint;
+
             var titlePrint = myObj.data[0].title;
-            document.getElementById("tombstone").innerHTML = titlePrint;
-            //use ID to generate artwork link
+            document.getElementById("title").innerHTML = titlePrint;
+
             var imageID = myObj.data[0].image_id;
+
+            // TODO: Align this with sizes used on the website?
             var windowWidth = window.innerWidth;
-            var windowHeight = window.innerHeight;
-            //seeds available - 800 and 1200 for now
             var imageWidth = 800;
             if (windowWidth > 800) {
                 imageWidth = 1200;
             }
+
             var imageLink = '<img src = ' + '"https://www.artic.edu/iiif/2/' + imageID + '/full/' + imageWidth + ',/0/default.jpg">'
             document.getElementById("artwork").innerHTML = imageLink;
-            //get browser dimensions to get appropriate width and height?
+
             var downloadUrl = 'https://www.artic.edu/iiif/2/' + imageID + '/full/3000,/0/default.jpg'
             document.getElementById("download-link").setAttribute('href', downloadUrl);
             document.getElementById("download-link").setAttribute('download', titlePrint + '.jpg');

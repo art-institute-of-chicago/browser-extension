@@ -25,7 +25,7 @@ function getArtworkData() {
             }
 
             var imageLink = '<img src = ' + '"https://www.artic.edu/iiif/2/' + imageID + '/full/' + imageWidth + ',/0/default.jpg">'
-            document.getElementById("artwork").innerHTML = imageLink;
+            document.getElementById("artwork-container").innerHTML = imageLink;
 
             var downloadUrl = 'https://www.artic.edu/iiif/2/' + imageID + '/full/3000,/0/default.jpg'
             document.getElementById("download-link").setAttribute('href', downloadUrl);

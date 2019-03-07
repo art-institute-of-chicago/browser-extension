@@ -1,5 +1,4 @@
 :root {
-    font-family: 'Open Sans', sans-serif;
     --spacing: 20px;
     --color-gray: rgba(0,0,0,.5);
     --color-gray-active: rgba(0,0,0,.6);
@@ -8,6 +7,11 @@
 a:link, a:visited {
     color: inherit;
     text-decoration: none;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 100%;
 }
 
 #artwork-container {

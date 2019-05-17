@@ -10,6 +10,7 @@ function getArtworkData() {
             var myObj = JSON.parse(this.responseText);
 
             var artistPrint = myObj.data[0].artist_display;
+            artistPrint = artistPrint.replace('\n', '<br/>');
             document.getElementById("artist").innerHTML = artistPrint;
 
             var titlePrint = myObj.data[0].title;

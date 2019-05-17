@@ -8,6 +8,7 @@ function getArtworkData() {
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             var myObj = JSON.parse(this.responseText);
+            console.log(myObj);
 
             var artistPrint = myObj.data[0].artist_display;
             artistPrint = artistPrint.replace('\n', '<br/>');
@@ -22,10 +23,27 @@ function getArtworkData() {
 
             // TODO: Align this with sizes used on the website?
             var windowWidth = window.innerWidth;
-            var imageWidth = 800;
+            var windowHeight = window.innerHeight;
+            var imageWidth = myObj.data[0].thumbnail.width;
+            var imageHeight = myObj.data[0].thumbnail.height;
+            console.log('window width', windowWidth);
+            console.log('window width', windowHeight);
+            var windowAspect = window.innerWidth / window.innerHeight;
+            var imageAspect = imageWidth / imageHeight;
+
+            var diffAspect = imageAspect - windowAspect;
+            if (diffAspect > 0) {
+                console.log('landscape');
+            } else {
+                console.log('portrait');
+            }
+
+            imageWidth = 843;
+
+            /*var imageWidth = 800;
             if (windowWidth > 800) {
                 imageWidth = 1200;
-            }
+            }*/
 
             var imageLink = '<img src = ' + '"https://www.artic.edu/iiif/2/' + imageID + '/full/' + imageWidth + ',/0/default.jpg">'
             document.getElementById("artwork-container").innerHTML = imageLink;
@@ -46,7 +64,8 @@ function getArtworkData() {
             "title",
             "artist_display",
             "image_id",
-            "date_display"
+            "date_display",
+            "thumbnail"
         ],
         "boost": false,
         "limit": 1,
@@ -63,20 +82,6 @@ function getArtworkData() {
                             {
                                 "exists": {
                                     "field": "image_id"
-                                }
-                            },
-                            {
-                                "term" : {
-                                    "thumbnail.width": 3000
-
-                                }
-                            },
-                            {
-                                "range": {
-                                    "thumbnail.height": {
-                                        "gte": 1575,
-                                        "lte": 2175
-                                    }
                                 }
                             }
 

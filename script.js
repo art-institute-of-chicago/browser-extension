@@ -14,7 +14,9 @@ function getArtworkData() {
             document.getElementById("artist").innerHTML = artistPrint;
 
             var titlePrint = myObj.data[0].title;
-            document.getElementById("title").innerHTML = titlePrint;
+            var titleElement = document.querySelector("#title a");
+            titleElement.innerHTML = titlePrint;
+            titleElement.setAttribute('href', 'https://www.artic.edu/artworks/' + myObj.data[0].id + '/' + slugify(titlePrint));
 
             var imageID = myObj.data[0].image_id;
 
@@ -92,4 +94,16 @@ function getArtworkData() {
     let artworkRequest2 = JSON.stringify(artworkRequest);
     xmlhttp.send(artworkRequest2);
 
+    /**
+     * Use this for artwork slugs to prevent a redirect.
+     * @link https://gist.github.com/mathewbyrne/1280286
+     */
+    function slugify(text) {
+      return text.toString().toLowerCase()
+        .replace(/\s+/g, '-')           // Replace spaces with -
+        .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
+        .replace(/\-\-+/g, '-')         // Replace multiple - with single -
+        .replace(/^-+/, '')             // Trim - from start of text
+        .replace(/-+$/, '');            // Trim - from end of text
+    }
 }

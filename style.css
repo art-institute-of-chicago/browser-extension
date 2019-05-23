@@ -81,6 +81,12 @@ body {
 
 #tombstone #title {
     margin-bottom: calc(var(--spacing) / 2);
+    font-weight: bold;
+}
+
+#tombstone #title a:hover {
+    color: gray;
+    text-decoration: underline;
 }
 
 #logo {

@@ -8,7 +8,6 @@ function getArtworkData() {
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             var myObj = JSON.parse(this.responseText);
-            console.log(myObj);
 
             var artistPrint = myObj.data[0].artist_display;
             artistPrint = artistPrint.replace('\n', '<br/>');
@@ -20,32 +19,19 @@ function getArtworkData() {
             titleElement.setAttribute('href', 'https://www.artic.edu/artworks/' + myObj.data[0].id + '/' + slugify(titlePrint));
 
             var imageID = myObj.data[0].image_id;
-
-            // TODO: Align this with sizes used on the website?
             var windowWidth = window.innerWidth;
             var windowHeight = window.innerHeight;
             var imageWidth = myObj.data[0].thumbnail.width;
             var imageHeight = myObj.data[0].thumbnail.height;
-            console.log('window width', windowWidth);
-            console.log('window width', windowHeight);
-            var windowAspect = window.innerWidth / window.innerHeight;
-            var imageAspect = imageWidth / imageHeight;
+            //resize image to fit in browser
+            newImageWidth = Math.round(window.innerWidth * .80);
+            newImageHeight = Math.round(window.innerHeight * .80);
 
-            var diffAspect = imageAspect - windowAspect;
-            if (diffAspect > 0) {
-                console.log('landscape');
-            } else {
-                console.log('portrait');
-            }
+            imageWidth = newImageWidth;
+            imageHeight = newImageHeight;
 
-            imageWidth = 843;
-
-            /*var imageWidth = 800;
-            if (windowWidth > 800) {
-                imageWidth = 1200;
-            }*/
-
-            var imageLink = '<img src = ' + '"https://www.artic.edu/iiif/2/' + imageID + '/full/' + imageWidth + ',/0/default.jpg">'
+            //use iiif protocol to display and fit image in browser window space
+            var imageLink = '<img src = ' + '"https://www.artic.edu/iiif/2/' + imageID + '/full/!'+imageWidth+',' + imageHeight + '/0/default.jpg">'
             document.getElementById("artwork-container").innerHTML = imageLink;
 
             var downloadUrl = 'https://www.artic.edu/iiif/2/' + imageID + '/full/3000,/0/default.jpg'

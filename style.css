@@ -43,25 +43,6 @@ body {
     display: block;
 }
 
-#download-container #copyright {
-    display: flex;
-}
-
-#download-container #copyright img {
-    height: 36px;
-    width: 100px;
-
-    transition-property: opacity;
-    transition-duration: .15s;
-    transition-timing-function: ease-in-out;
-
-    opacity: 0.5;
-}
-
-#download-container #copyright img:hover {
-    opacity: 0.6;
-}
-
 #download-container #download-link {
     margin-left: calc(var(--spacing) / 2);
 

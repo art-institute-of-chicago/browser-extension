@@ -40,6 +40,25 @@ function getArtworkData() {
             var downloadUrl = 'https://www.artic.edu/iiif/2/' + imageID + '/full/3000,/0/default.jpg'
             document.getElementById("download-link").setAttribute('href', downloadUrl);
             document.getElementById("download-link").setAttribute('download', titlePrint + '.jpg');
+
+            if (chrome) {
+                cookie = chrome.cookies.get({
+                    url: "http://newtab.artic.edu",
+                    name: "tabHistory"
+                }, function (cookie) {
+                    ids = cookie ? JSON.parse(cookie.value) : [];
+                    console.log(ids);
+                    ids.push("" + myObj.data[0].id);
+                    chrome.cookies.set({
+                        url: "http://newtab.artic.edu",
+                        name: "tabHistory",
+                        value: JSON.stringify(ids),
+                    });
+                });
+            }
+            else {
+                // Support for other browsers
+            }
         }
     };
 

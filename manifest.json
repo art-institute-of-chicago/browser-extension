@@ -12,6 +12,8 @@
         "newtab": "newtab.html"
     },
     "permissions": [
-        "activeTab"
+        "cookies",
+        "activeTab",
+        "*://newtab.artic.edu/"
     ]
 }

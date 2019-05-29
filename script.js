@@ -16,7 +16,9 @@ function getArtworkData() {
             var titlePrint = myObj.data[0].title;
             var titleElement = document.querySelector("#title a");
             titleElement.innerHTML = titlePrint;
-            titleElement.setAttribute('href', 'https://www.artic.edu/artworks/' + myObj.data[0].id + '/' + slugify(titlePrint));
+
+            var linkToArtwork = 'https://www.artic.edu/artworks/' + myObj.data[0].id + '/' + slugify(titlePrint);
+            titleElement.setAttribute('href', linkToArtwork);
 
             var imageID = myObj.data[0].image_id;
             var windowWidth = window.innerWidth;
@@ -32,6 +34,7 @@ function getArtworkData() {
 
             //use iiif protocol to display and fit image in browser window space
             var imageLink = '<img src = ' + '"https://www.artic.edu/iiif/2/' + imageID + '/full/!'+imageWidth+',' + imageHeight + '/0/default.jpg">'
+            imageLink = '<a href="' + linkToArtwork + '">' + imageLink + '</a>';
             document.getElementById("artwork-container").innerHTML = imageLink;
 
             var downloadUrl = 'https://www.artic.edu/iiif/2/' + imageID + '/full/3000,/0/default.jpg'

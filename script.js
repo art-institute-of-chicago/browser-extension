@@ -2,7 +2,7 @@ getArtworkData();
 
 function getArtworkData() {
     var xmlhttp = new XMLHttpRequest();
-    var dataHubURL = 'http://aggregator-data.artic.edu/api/v1/search';
+    var dataHubURL = 'https://aggregator-data.artic.edu/api/v1/search';
     xmlhttp.open("POST", dataHubURL, true);
     xmlhttp.setRequestHeader('Content-Type', 'application/json');
     xmlhttp.onreadystatechange = function() {

@@ -1,6 +1,6 @@
 ![Art Institute of Chicago](https://raw.githubusercontent.com/Art-Institute-of-Chicago/template/master/aic-logo.gif)
 
-# DRAFT - aic-browser-extension
+# aic-browser-extension (DRAFT)
 
 This Chrome Plug-in presents a work of art in the browser window every time a new tab is opened. It uses the Art Institute of Chicago's new data API to access images and other data for over 50,000 artworks.
 
@@ -30,7 +30,13 @@ cd aic-browser-extension
 * Select aic-browser-extension folder
 * Optionally toggle developer mode off
 
-(add screenshbots)
+&nbsp;
+![alt text](docs/chrome-setup-1.jpg)  
+&nbsp;
+&nbsp;
+
+![alt text](docs/chrome-setup-2.jpg)
+
 
 
 ## Configuration

@@ -9,8 +9,11 @@ function getArtworkData() {
         if (this.readyState == 4 && this.status == 200) {
             var myObj = JSON.parse(this.responseText);
 
-            var artistPrint = myObj.data[0].artist_display;
-            artistPrint = artistPrint.replace('\n', '<br/>');
+            var artistVals = [myObj.data[0].artist_title, myObj.data[0].date_display];
+            artistVals = artistVals.filter(function (el) {
+                return el != null;
+            });
+            var artistPrint = artistVals.join(', ');
             document.getElementById("artist").innerHTML = artistPrint;
 
             var titlePrint = myObj.data[0].title;
@@ -51,7 +54,8 @@ function getArtworkData() {
         "fields": [
             "id",
             "title",
-            "artist_display",
+            "artist_title",
+            "date_display",
             "image_id",
             "date_display",
             "thumbnail"

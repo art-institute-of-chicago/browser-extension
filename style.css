@@ -99,7 +99,7 @@ body {
 #logo {
     position: absolute;
     top: var(--spacing);
-    right: var(--spacing);
+    left: var(--spacing);
 }
 
 #logo img {

@@ -82,13 +82,14 @@ body {
 
 #tombstone #title {
     font-family: 'Amiri', serif;
-    margin-bottom: calc(var(--spacing) / 2);
-    font-size: 24px;
+    font-size: 18px;
     color: #333;
 }
 
 #tombstone #artist {
     color: #767676;
+    font-size: 12px;
+    line-height: 15px;
 }
 
 #tombstone #title a:hover {

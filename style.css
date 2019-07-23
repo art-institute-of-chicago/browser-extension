@@ -78,6 +78,7 @@ body {
     bottom: var(--spacing);
     left: var(--spacing);
     line-height: 1.6;
+    width: calc(100% - 120px);
 }
 
 #tombstone #title {

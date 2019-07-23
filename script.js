@@ -77,6 +77,7 @@ function getArtworkData() {
                         ]
                     }
                 },
+                "boost_mode": "replace",
                 "random_score": {
                     "field": "id",
                     "seed": timeStamp

@@ -1,97 +1,100 @@
-getArtworkData();
+(function () {
 
-function getArtworkData() {
-    var xmlhttp = new XMLHttpRequest();
-    var dataHubURL = 'https://aggregator-data.artic.edu/api/v1/search';
-    xmlhttp.open("POST", dataHubURL, true);
-    xmlhttp.setRequestHeader('Content-Type', 'application/json');
-    xmlhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            var myObj = JSON.parse(this.responseText);
+    getJson('https://aggregator-data.artic.edu/api/v1/search', getQuery(), updatePage);
 
-            var artistVals = [myObj.data[0].artist_title, myObj.data[0].date_display];
-            artistVals = artistVals.filter(function (el) {
-                return el != null;
-            });
-            var artistPrint = artistVals.join(', ');
-            document.getElementById("artist").innerHTML = artistPrint;
-
-            var titlePrint = myObj.data[0].title;
-            var titleElement = document.querySelector("#title a");
-            titleElement.innerHTML = titlePrint;
-
-            var linkToArtwork = 'https://www.artic.edu/artworks/' + myObj.data[0].id + '/' + slugify(titlePrint);
-            titleElement.setAttribute('href', linkToArtwork);
-
-            var imageID = myObj.data[0].image_id;
-            var windowWidth = window.innerWidth;
-            var windowHeight = window.innerHeight;
-            var imageWidth = myObj.data[0].thumbnail.width;
-            var imageHeight = myObj.data[0].thumbnail.height;
-            //resize image to fit in browser
-            newImageWidth = Math.round(window.innerWidth * .80);
-            newImageHeight = Math.round(window.innerHeight * .80);
-
-            imageWidth = newImageWidth;
-            imageHeight = newImageHeight;
-
-            //use iiif protocol to display and fit image in browser window space
-            var imageLink = '<img src = ' + '"https://www.artic.edu/iiif/2/' + imageID + '/full/!'+imageWidth+',' + imageHeight + '/0/default.jpg">'
-            imageLink = '<a href="' + linkToArtwork + '">' + imageLink + '</a>';
-            document.getElementById("artwork-container").innerHTML = imageLink;
-
-            var downloadUrl = 'https://www.artic.edu/iiif/2/' + imageID + '/full/3000,/0/default.jpg'
-            document.getElementById("download-link").setAttribute('href', downloadUrl);
-            document.getElementById("download-link").setAttribute('download', titlePrint + '.jpg');
-        }
-    };
-
-    //how often the randomness should work
-    let timeStamp = Math.floor(Date.now() / 1000);
-
-    let artworkRequest = {
-        "resources": "artworks",
-        "fields": [
-            "id",
-            "title",
-            "artist_title",
-            "date_display",
-            "image_id",
-            "date_display",
-            "thumbnail"
-        ],
-        "boost": false,
-        "limit": 1,
-        "query": {
-            "function_score": {
-                "query": {
-                    "bool": {
-                        "must": [
-                            {
-                                "term": {
-                                    "is_public_domain": true
-                                }
-                            },
-                            {
-                                "exists": {
-                                    "field": "image_id"
-                                }
-                            }
-
-                        ]
-                    }
-                },
-                "boost_mode": "replace",
-                "random_score": {
-                    "field": "id",
-                    "seed": timeStamp
-                }
+    function getJson(url, body, callback) {
+        let request = new XMLHttpRequest();
+        request.open('POST', url, true);
+        request.setRequestHeader('Content-Type', 'application/json');
+        request.onreadystatechange = function() {
+            if (this.readyState === 4 && this.status === 200) {
+                callback(JSON.parse(this.responseText));
             }
-        }
-    };
+        };
+        request.send(JSON.stringify(body));
+    }
 
-    let artworkRequest2 = JSON.stringify(artworkRequest);
-    xmlhttp.send(artworkRequest2);
+    function updatePage(response) {
+
+        let artwork = response.data[0];
+
+        let titleElement = document.querySelector('#title a');
+        let artistElement = document.getElementById('artist');
+
+        let artistPrint = [artwork.artist_title, artwork.date_display].filter(function (el) {
+            return el != null;
+        }).join(', ');
+        let titlePrint = artwork.title;
+        let linkToArtwork = 'https://www.artic.edu/artworks/' + artwork.id + '/' + slugify(titlePrint);
+
+        artistElement.innerHTML = artistPrint;
+        titleElement.innerHTML = titlePrint;
+        titleElement.setAttribute('href', linkToArtwork);
+
+        let imageID = artwork.image_id;
+        let windowWidth = window.innerWidth;
+        let windowHeight = window.innerHeight;
+        let imageWidth = artwork.thumbnail.width;
+        let imageHeight = artwork.thumbnail.height;
+
+        //resize image to fit in browser
+        let newImageWidth = Math.round(window.innerWidth * .80);
+        let newImageHeight = Math.round(window.innerHeight * .80);
+
+        imageWidth = newImageWidth;
+        imageHeight = newImageHeight;
+
+        //use iiif protocol to display and fit image in browser window space
+        let imageLink = '<img src ="https://www.artic.edu/iiif/2/' + imageID + '/full/!' + imageWidth + ',' + imageHeight + '/0/default.jpg">'
+        imageLink = '<a href="' + linkToArtwork + '">' + imageLink + '</a>';
+        document.getElementById("artwork-container").innerHTML = imageLink;
+
+        var downloadUrl = 'https://www.artic.edu/iiif/2/' + imageID + '/full/3000,/0/default.jpg'
+        document.getElementById("download-link").setAttribute('href', downloadUrl);
+        document.getElementById("download-link").setAttribute('download', titlePrint + '.jpg');
+    }
+
+    function getQuery() {
+        let timeStamp = Math.floor(Date.now() / 1000);
+
+        return {
+            "resources": "artworks",
+            "fields": [
+                "id",
+                "title",
+                "artist_title",
+                "image_id",
+                "date_display",
+                "thumbnail"
+            ],
+            "boost": false,
+            "limit": 1,
+            "query": {
+                "function_score": {
+                    "query": {
+                        "bool": {
+                            "must": [
+                                {
+                                    "term": {
+                                        "is_public_domain": true
+                                    },
+                                },
+                                {
+                                    "exists": {
+                                        "field": "image_id",
+                                    },
+                                },
+                            ],
+                        },
+                    },
+                    "random_score": {
+                        "field": "id",
+                        "seed": timeStamp
+                    },
+                },
+            },
+        };
+    }
 
     /**
      * Use this for artwork slugs to prevent a redirect.
@@ -105,4 +108,5 @@ function getArtworkData() {
         .replace(/^-+/, '')             // Trim - from start of text
         .replace(/-+$/, '');            // Trim - from end of text
     }
-}
+
+}());

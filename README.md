@@ -113,7 +113,7 @@ We also welcome bug reports and questions under GitHub's [Issues](issues).
 
 ## Acknowledgements
 
-Thanks to Abdur Khan, a 2018 summer intern in the Experience Design department
+Thanks to [Abdur Khan](https://github.com/AKhan139), a 2018 summer intern in the Experience Design department
 at the Art Institute of Chicago that kicked off this project. [Tina Shah](https://github.com/surreal8),
 [nikhil trivedi](https://github.com/nikhiltri), [Illya Moskvin](https://github.com/IllyaMoskvin)
 and [Mark Dascoli](https://github.com/markdascoli) finished up what he started.

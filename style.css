@@ -77,20 +77,36 @@ body {
     position: absolute;
     bottom: var(--spacing);
     left: var(--spacing);
-    line-height: 1.6;
+
     width: calc(100% - 120px);
 }
 
 #tombstone #title {
     font-family: 'Amiri', serif;
-    font-size: 18px;
+    font-size: 1.2em;
     color: #333;
+
+    /* height = line-height * lines */
+    line-height: 1.4em;
+    height: 2.8em;
+
+    margin-bottom: 0.8em;
+
+    max-width: 100%;
+    width: 24em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    /* https://css-tricks.com/line-clampin/ */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
 }
 
 #tombstone #artist {
     color: #767676;
-    font-size: 12px;
-    line-height: 15px;
+    font-size: 0.8em;
+    line-height: 1.6em;
 }
 
 #tombstone #title a:hover {

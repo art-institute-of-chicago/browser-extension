@@ -86,9 +86,9 @@ body {
     font-size: 1.2em;
     color: #333;
 
-    /* height = line-height * lines */
+    /* max-height = line-height * lines */
     line-height: 1.4em;
-    height: 2.8em;
+    max-height: 2.8em;
 
     margin-bottom: 0.8em;
 

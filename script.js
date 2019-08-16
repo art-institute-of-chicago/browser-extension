@@ -1,6 +1,47 @@
 (function () {
 
-    getJson('https://aggregator-data.artic.edu/api/v1/search', getQuery(), updatePage);
+    let titleElement;
+    let artistElement;
+    let artworkContainer;
+    let viewer;
+
+    document.addEventListener("DOMContentLoaded", function(event) {
+        titleElement = document.querySelector('#title a');
+        artistElement = document.getElementById('artist');
+        artworkContainer = document.getElementById('artwork-container');
+
+        viewer = OpenSeadragon({
+            element:         artworkContainer,
+            xmlns:           "http://schemas.microsoft.com/deepzoom/2008",
+            prefixUrl:       "//openseadragon.github.io/openseadragon/images/",
+            homeFillsViewer: true,
+            springStiffness: 15,
+            visibilityRatio: 1,
+            zoomPerScroll: 1.2,
+            zoomPerClick: 1.3,
+            immediateRender:false,
+            constrainDuringPan: true,
+            animationTime: 1.5,
+            minZoomLevel: 0,
+            minZoomImageRatio: 0.8,
+            maxZoomPixelRatio: 1.0,
+            defaultZoomLevel: 0,
+            gestureSettingsMouse: {
+                scrollToZoom: true
+            },
+            showZoomControl: false,
+            showHomeControl: false,
+            showFullPageControl: false,
+            showRotationControl: false,
+            showSequenceControl: false,
+        });
+
+        getJson('https://aggregator-data.artic.edu/api/v1/search', getQuery(), updatePage);
+    });
+
+
+
+
 
     function getJson(url, body, callback) {
         let request = new XMLHttpRequest();
@@ -18,9 +59,6 @@
 
         let artwork = response.data[0];
 
-        let titleElement = document.querySelector('#title a');
-        let artistElement = document.getElementById('artist');
-
         let artistPrint = [artwork.artist_title, artwork.date_display].filter(function (el) {
             return el != null;
         }).join(', ');
@@ -32,22 +70,21 @@
         titleElement.setAttribute('href', linkToArtwork);
 
         let imageID = artwork.image_id;
-        let windowWidth = window.innerWidth;
-        let windowHeight = window.innerHeight;
-        let imageWidth = artwork.thumbnail.width;
-        let imageHeight = artwork.thumbnail.height;
 
-        //resize image to fit in browser
-        let newImageWidth = Math.round(window.innerWidth * .80);
-        let newImageHeight = Math.round(window.innerHeight * .80);
-
-        imageWidth = newImageWidth;
-        imageHeight = newImageHeight;
-
-        //use iiif protocol to display and fit image in browser window space
-        let imageLink = '<img src ="https://www.artic.edu/iiif/2/' + imageID + '/full/!' + imageWidth + ',' + imageHeight + '/0/default.jpg">'
-        imageLink = '<a href="' + linkToArtwork + '">' + imageLink + '</a>';
-        document.getElementById("artwork-container").innerHTML = imageLink;
+        viewer.addTiledImage( {
+            tileSource:             {
+              "@context": "http://iiif.io/api/image/2/context.json",
+              "@id": 'https://www.artic.edu/iiif/2/' + imageID,
+              "width": artwork.thumbnail.width,
+              "height": artwork.thumbnail.height,
+              "profile": [ "http://iiif.io/api/image/2/level2.json" ],
+              "protocol": "http://iiif.io/api/image",
+              "tiles": [{
+                "scaleFactors": [ 1, 2, 4, 8, 16 ],
+                "width": 256
+              }]
+            },
+        });
 
         var downloadUrl = 'https://www.artic.edu/iiif/2/' + imageID + '/full/3000,/0/default.jpg'
         document.getElementById("download-link").setAttribute('href', downloadUrl);

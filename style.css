@@ -83,8 +83,8 @@ body {
 
 #tombstone {
     position: absolute;
-    bottom: 0;
-    left: 0;
+    bottom: var(--spacing);
+    left: var(--spacing);
 
     background-color: rgba(0,0,0,0.5);
     padding: 20px 80px 20px 20px;

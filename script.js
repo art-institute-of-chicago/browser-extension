@@ -121,6 +121,16 @@
                                         "field": "image_id",
                                     },
                                 },
+                                {
+                                    "exists": {
+                                        "field": "thumbnail.width",
+                                    },
+                                },
+                                {
+                                    "exists": {
+                                        "field": "thumbnail.height",
+                                    },
+                                },
                             ],
                         },
                     },

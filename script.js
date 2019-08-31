@@ -1,12 +1,14 @@
 (function () {
 
+    let tombstoneElement;
     let titleElement;
     let artistElement;
     let artworkContainer;
     let viewer;
 
     document.addEventListener("DOMContentLoaded", function(event) {
-        titleElement = document.querySelector('#title a');
+        tombstoneElement = document.getElementById('tombstone');
+        titleElement = document.getElementById('title');
         artistElement = document.getElementById('artist');
         artworkContainer = document.getElementById('artwork-container');
 
@@ -39,10 +41,6 @@
         getJson('https://aggregator-data.artic.edu/api/v1/search', getQuery(), updatePage);
     });
 
-
-
-
-
     function getJson(url, body, callback) {
         let request = new XMLHttpRequest();
         request.open('POST', url, true);
@@ -67,7 +65,7 @@
 
         artistElement.innerHTML = artistPrint;
         titleElement.innerHTML = titlePrint;
-        titleElement.setAttribute('href', linkToArtwork);
+        tombstoneElement.setAttribute('href', linkToArtwork);
 
         let imageID = artwork.image_id;
 

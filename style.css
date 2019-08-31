@@ -86,10 +86,18 @@ body {
     bottom: var(--spacing);
     left: var(--spacing);
 
-    background-color: rgba(0,0,0,0.5);
     padding: 20px 80px 20px 20px;
 
     max-width: calc(100% - 120px);
+
+    transition-property: background-color;
+    transition-duration: .15s;
+    transition-timing-function: ease-in-out;
+    background-color: rgba(0,0,0,0.5);
+}
+
+#tombstone:hover {
+    background-color: rgba(0,0,0,.6);
 }
 
 #tombstone #title {

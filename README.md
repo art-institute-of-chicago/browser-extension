@@ -2,13 +2,19 @@
 
 # Art Institute of Chicago Browser Extension (DRAFT)
 
-This Chrome plug-in presents a work of art in the browser window every time a new tab is opened. It uses the Art Institute of Chicago's new data API to access images and other data for over 50,000 artworks.
+In September 2019, the Art Institute of Chicago (AIC) launched its first data API for public use. The API provides information and access to over 50,000 artworks. 
 
-For public use, we've made this extension available in the Chrome Web Store [link]. We're providing this repo to serve as a simple example of using the Art Institute of Chicago's data API.
+Using the data API and [IIIF's image API](https://iiif.io), AIC's browser extension presents an artwork from the museum's collection in your browser every time a new tab is opened.
+
+For public use, this extension is available in the Chrome Web Store [link]. 
+
+This repo serves as an example of using the Art Institute of Chicago's data API.
+
+![Screenshot of the extension in action ](docs/chromeNewTab.jpg)
 
 ## Features
 
-* Presents artwork from the Art Institute's collection in every new browser tab
+* Presents artwork from the Art Institute's collection in new browser tab
 * Demonstrates use of the Art Institute's data API
 
 ## Requirements
@@ -102,7 +108,7 @@ git checkout -b feature/good-short-description
 git push origin feature/good-short-description
 ```
 
-Then on github.com, create a Pull Request to merge your changes into our
+On github.com, create a Pull Request to merge your changes into our
 `develop` branch.
 
 This project is released with a Contributor Code of Conduct. By participating in
@@ -112,14 +118,18 @@ We welcome bug reports and questions under GitHub's [Issues](issues). For other 
 
 ## Acknowledgements
 
-Thanks to [Abdur Khan](https://github.com/AKhan139), a 2018 summer intern in the Experience Design department
-at the Art Institute of Chicago that kicked off this project. [Tina Shah](https://github.com/surreal8),
-[nikhil trivedi](https://github.com/nikhiltri), [Illya Moskvin](https://github.com/IllyaMoskvin)
-and [Mark Dascoli](https://github.com/markdascoli) finished up what he started.
+Inspiration for this project came from the following browser extension projects:
+- [David Rumsey Map Collection - MapTab](https://chrome.google.com/webstore/detail/david-rumsey-map-collecti/fnheacjohhlddiffbmafmpoblbkfgmde?hl=en)
+- [ueno.design](https://chrome.google.com/webstore/detail/uenodesign/iiekikakogelhkneknonedfhcajdlgda)
+- [Muzli 2 - Stay Inspired](https://chrome.google.com/webstore/detail/muzli-2-stay-inspired/glcipcfhmopcgidicgdociohdoicpdfc)
 
-The following article was the starting point for this project:
+AIC's browser extension was conceived in the Experience Design department during the 2018 internship program, Diversifying Art Museum Leadership Initiative (DAMLI). 
+Thanks to our intern, [Abdur Khan](https://github.com/AKhan139), for helping make this project possible.
 
+The following tutorial helped us get started:
 [How to Create and Publish a Chrome Extension in 20 minutes](https://www.freecodecamp.org/news/how-to-create-and-publish-a-chrome-extension-in-20-minutes-6dc8395d7153/) from [freeCodeCamp.org](https://freeCodeCamp.org)
+
+Additional thanks to [Tina Shah](https://github.com/surreal8), [nikhil trivedi](https://github.com/nikhiltri), [Illya Moskvin](https://github.com/IllyaMoskvin), and [Mark Dascoli](https://github.com/markdascoli) for completing the browser extension.
 
 ## Licensing
 

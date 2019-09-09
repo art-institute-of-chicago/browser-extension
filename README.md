@@ -2,9 +2,11 @@
 
 # Art Institute of Chicago Browser Extension (DRAFT)
 
-In September 2019, the Art Institute of Chicago (AIC) launched its first data API for public use. The API provides information and access to over 50,000 artworks. 
+> A browser extension that presents a random work of art from the Art Institute of Chicago's collection with each new tab.
 
-Using the data API and [IIIF's image API](https://iiif.io), AIC's browser extension presents an artwork from the museum's collection in your browser every time a new tab is opened.
+In September 2019, the Art Institute of Chicago (AIC) launched its first data API for public use. The API provides information and access to over 100,000 artworks. 
+
+Using the data API and [IIIF's image API](https://iiif.io), AIC's browser extension presents an artwork from the museum's collection in your browser every time a new tab is opened. The extension focuses on selecting from over 50,000 works marked for [public domain](https://www.artic.edu/image-licensing) use.
 
 For public use, this extension is available in the Chrome Web Store [link]. 
 
@@ -129,7 +131,7 @@ Thanks to our intern, [Abdur Khan](https://github.com/AKhan139), for helping mak
 The following tutorial helped us get started:
 [How to Create and Publish a Chrome Extension in 20 minutes](https://www.freecodecamp.org/news/how-to-create-and-publish-a-chrome-extension-in-20-minutes-6dc8395d7153/) from [freeCodeCamp.org](https://freeCodeCamp.org)
 
-Additional thanks to [Tina Shah](https://github.com/surreal8), [nikhil trivedi](https://github.com/nikhiltri), [Illya Moskvin](https://github.com/IllyaMoskvin), and [Mark Dascoli](https://github.com/markdascoli) for completing the browser extension.
+Additional thanks to [Mark Dascoli](https://github.com/markdascoli), [Illya Moskvin](https://github.com/IllyaMoskvin), [Tina Shah](https://github.com/surreal8), Kirsten Southwell, and [nikhil trivedi](https://github.com/nikhiltri), for helping complete version 1 of the browser extension.
 
 ## Licensing
 

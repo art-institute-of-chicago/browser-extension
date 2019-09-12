@@ -1,5 +1,11 @@
 (function () {
 
+    // LocalStorage keys for reference
+    const savedResponseKey = 'response';
+
+    // Settings for cache aggressiveness
+    const artworksToPrefetch = 50;
+
     let tombstoneElement;
     let titleElement;
     let artistElement;
@@ -38,7 +44,17 @@
             showSequenceControl: false,
         });
 
-        getJson('https://aggregator-data.artic.edu/api/v1/search', getQuery(), updatePage);
+        // https://developer.mozilla.org/en-US/docs/Web/API/Storage/getItem
+        // ...returns `null` if not found. JSON.parsing `null` also returns `null`
+        let savedResponse = JSON.parse(localStorage.getItem(savedResponseKey));
+
+        if (savedResponse !== null) {
+            if (savedResponse.data.length > 0) {
+                return processResponse(savedResponse);
+            }
+        }
+
+        getJson('https://aggregator-data.artic.edu/api/v1/search', getQuery(), processResponse);
     });
 
     function getJson(url, body, callback) {
@@ -53,10 +69,17 @@
         request.send(JSON.stringify(body));
     }
 
-    function updatePage(response) {
-
+    /**
+     * Remove one artwork from the response and save it to LocalStorage.
+     */
+    function processResponse(response) {
         let artwork = response.data[0];
+        response.data = response.data.slice(1);
+        localStorage.setItem(savedResponseKey, JSON.stringify(response));
+        updatePage(response.data[0]);
+    }
 
+    function updatePage(artwork) {
         let artistPrint = [artwork.artist_title, artwork.date_display].filter(function (el) {
             return el != null;
         }).join(', ');
@@ -90,8 +113,6 @@
     }
 
     function getQuery() {
-        let timeStamp = Math.floor(Date.now() / 1000);
-
         return {
             "resources": "artworks",
             "fields": [
@@ -103,7 +124,7 @@
                 "thumbnail"
             ],
             "boost": false,
-            "limit": 1,
+            "limit": artworksToPrefetch,
             "query": {
                 "function_score": {
                     "query": {
@@ -135,11 +156,19 @@
                     "boost_mode": "replace",
                     "random_score": {
                         "field": "id",
-                        "seed": timeStamp
+                        "seed": getSeed(),
                     },
                 },
             },
         };
+    }
+
+    /**
+     * Using millisecond for seed lowers chance of collision. Since we prefetch
+     * API results and images, we don't depend on serverside collision.
+     */
+    function getSeed() {
+        return Date.now();
     }
 
     /**

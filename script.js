@@ -7,9 +7,9 @@
 
     // Settings for cache aggressiveness
     const artworksToPrefetch = 50;
-    const imagesToPreload = 5;
+    const imagesToPreload = 7;
 
-    const imagesToPreloadPerSession = 2;
+    const imagesToPreloadPerSession = 3;
     let imagesPreloadedThisSession = 0;
 
     let tombstoneElement;
@@ -139,7 +139,8 @@
               "protocol": "http://iiif.io/api/image",
               "tiles": [{
                 "scaleFactors": [ 1, 2, 4, 8, 16 ],
-                "width": 256
+                "width": artwork.thumbnail.width,
+                "width": artwork.thumbnail.height,
               }]
             },
             opacity: isPreload ? 0 : 1,

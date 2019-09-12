@@ -25,11 +25,12 @@ body {
     left: 50%;
     transform: translate(-50%,-50%);
 
-    /*width: 80%;*/
+    width: 80%;
+    height: 80%;
     text-align: center;
 
-    width: 100%;
-    height: 100%;
+    /*width: 100%;*/
+    /*height: 100%;*/
 }
 /*
 #artwork-container img {
@@ -86,32 +87,32 @@ body {
     bottom: var(--spacing);
     left: var(--spacing);
 
-    padding: 20px 80px 20px 20px;
+    /*padding: 20px 80px 20px 20px;*/
 
     max-width: calc(100% - 120px);
 
     transition-property: background-color;
     transition-duration: .15s;
     transition-timing-function: ease-in-out;
-    background-color: rgba(0,0,0,0.5);
+    /*background-color: rgba(0,0,0,0.5);*/
 }
 
 #tombstone:hover {
-    background-color: rgba(0,0,0,.6);
+    /*background-color: rgba(0,0,0,.6);*/
 }
 
 #tombstone #title {
     font-family: 'Amiri', serif;
     font-size: 1.2em;
-    /*color: #333;*/
+    color: #333;
 
-    color: white;
-    text-shadow: 0px 0px 2px black;
+    /*color: white;*/
+    /*text-shadow: 0px 0px 2px black;*/
 
 
     /* max-height = line-height * lines */
     line-height: 1.4em;
-    max-height: 2.8em;
+    max-height: 1.4em;
 
     margin-bottom: 0.8em;
 
@@ -130,8 +131,9 @@ body {
     font-size: 0.8em;
     line-height: 1.6em;
 
-    color: #eee;
-    text-shadow: 0px 0px 2px black;
+    color: #333;
+    /*color: #eee;*/
+    /*text-shadow: 0px 0px 2px black;*/
 }
 
 #tombstone #title a:hover {

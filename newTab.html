@@ -6,31 +6,22 @@
         <link href="https://fonts.googleapis.com/css?family=Amiri|Open+Sans&display=swap" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="reset.css">
         <link rel="stylesheet" type="text/css" href="style.css">
-        <script type="text/javascript" src="script.js"></script>
-        <!-- Global site tag (gtag.js) - Google Analytics -->
-        <script type="text/javascript" src="gtag.js"></script>
-        <script>
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-
-            gtag('config', 'UA-4351925-1', {
-                'page_title' : 'New tab browser extension',
-                'page_location': 'https://newtab.artic.edu/newTab.html'
-            });
-        </script>
+        <script src="https://cdn.jsdelivr.net/npm/openseadragon@2.4/build/openseadragon/openseadragon.min.js"></script>
+        <script src="script.js"></script>
     </head>
     <body>
-        <div id="artwork-container"></div>
+        <div id="artwork-container">
+            <div id="artwork"></div>
+        </div>
         <div id="download-container">
             <a id="download-link">
                 <img src="assets/download--24.svg" alt="Download image"/>
             </a>
         </div>
-        <div id="tombstone">
-            <div id="title"><a></a></div>
+        <a id="tombstone">
+            <div id="title"></div>
             <div id="artist"></div>
-        </div>
+        </a>
         <div id="logo">
             <a href="https://www.artic.edu/" target="_blank">
                 <img src="assets/logo--92.svg" alt="Art Institute of Chicago"/>

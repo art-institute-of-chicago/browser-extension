@@ -7,7 +7,10 @@
 
     // Settings for cache aggressiveness
     const artworksToPrefetch = 50;
-    const imagesToPreload = 3;
+    const imagesToPreload = 5;
+
+    const imagesToPreloadPerSession = 2;
+    let imagesPreloadedThisSession = 0;
 
     let tombstoneElement;
     let titleElement;
@@ -170,10 +173,12 @@
                         localStorage.setItem(preloadedImagesKey, JSON.stringify(preloadedImages));
 
                         tiledImage.destroy(); // don't load more tiles during zoom and pan
+
+                        imagesPreloadedThisSession++;
                     }
 
                     // Exit early if we have enough images preloaded
-                    if (excludedImages.length > imagesToPreload) {
+                    if (excludedImages.length > imagesToPreload || imagesPreloadedThisSession >= imagesToPreloadPerSession) {
                         return;
                     }
 

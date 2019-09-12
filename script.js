@@ -108,7 +108,7 @@
                 "function_score": {
                     "query": {
                         "bool": {
-                            "must": [
+                            "filter": [
                                 {
                                     "term": {
                                         "is_public_domain": true
@@ -132,6 +132,7 @@
                             ],
                         },
                     },
+                    "boost_mode": "replace",
                     "random_score": {
                         "field": "id",
                         "seed": timeStamp

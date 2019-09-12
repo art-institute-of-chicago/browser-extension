@@ -2,9 +2,12 @@
 
     // LocalStorage keys for reference
     const savedResponseKey = 'response';
+    const preloadedImagesKey = 'preloaded';
+    const preloadingImagesKey = 'preloading';
 
     // Settings for cache aggressiveness
     const artworksToPrefetch = 50;
+    const imagesToPreload = 3;
 
     let tombstoneElement;
     let titleElement;
@@ -76,6 +79,26 @@
         let artwork = response.data[0];
         response.data = response.data.slice(1);
         localStorage.setItem(savedResponseKey, JSON.stringify(response));
+
+        // Remove any artwork not in left-over response from preloaded trackers
+        let imageIdsInResponse = response.data.map(function(item) {
+            return item.image_id;
+        });
+
+        let preloadedImages = JSON.parse(localStorage.getItem(preloadedImagesKey)) || [];
+        let preloadingImages = JSON.parse(localStorage.getItem(preloadingImagesKey)) || [];
+
+        preloadedImages = preloadedImages.filter(function(item) {
+            return imageIdsInResponse.includes(item);
+        });
+
+        preloadingImages = preloadingImages.filter(function(item) {
+            return imageIdsInResponse.includes(item);
+        });
+
+        localStorage.setItem(preloadingImagesKey, JSON.stringify(preloadingImages));
+        localStorage.setItem(preloadedImagesKey, JSON.stringify(preloadedImages));
+
         updatePage(response.data[0]);
     }
 
@@ -90,12 +113,23 @@
         titleElement.innerHTML = titlePrint;
         tombstoneElement.setAttribute('href', linkToArtwork);
 
-        let imageID = artwork.image_id;
+        var downloadUrl = 'https://www.artic.edu/iiif/2/' + artwork.image_id + '/full/3000,/0/default.jpg'
+        document.getElementById("download-link").setAttribute('href', downloadUrl);
+        document.getElementById("download-link").setAttribute('download', titlePrint + '.jpg');
 
-        viewer.addTiledImage( {
-            tileSource:             {
+        addTiledImage(artwork, false);
+    }
+
+    function addTiledImage(artwork, isPreload) {
+
+        // Save this so we can add it to our preload log
+        let currentImageId = artwork.image_id;
+
+        // https://openseadragon.github.io/docs/OpenSeadragon.Viewer.html#addTiledImage
+        viewer.addTiledImage({
+            tileSource: {
               "@context": "http://iiif.io/api/image/2/context.json",
-              "@id": 'https://www.artic.edu/iiif/2/' + imageID,
+              "@id": 'https://www.artic.edu/iiif/2/' + currentImageId,
               "width": artwork.thumbnail.width,
               "height": artwork.thumbnail.height,
               "profile": [ "http://iiif.io/api/image/2/level2.json" ],
@@ -105,11 +139,62 @@
                 "width": 256
               }]
             },
-        });
+            opacity: isPreload ? 0 : 1,
+            preload: isPreload ? true : false,
+            success: function (event) {
+                // https://openseadragon.github.io/docs/OpenSeadragon.TiledImage.html#.event:fully-loaded-change
+                event.item.addHandler('fully-loaded-change', function (callbackObject) {
 
-        var downloadUrl = 'https://www.artic.edu/iiif/2/' + imageID + '/full/3000,/0/default.jpg'
-        document.getElementById("download-link").setAttribute('href', downloadUrl);
-        document.getElementById("download-link").setAttribute('download', titlePrint + '.jpg');
+                    let tiledImage = callbackObject.eventSource;
+
+                    // We don't want this to fire on every zoom and pan
+                    tiledImage.removeAllHandlers('fully-loaded-change');
+
+                    // We want to check LocalStorage each time in case multiple new tabs are preloading
+                    let preloadedImages = JSON.parse(localStorage.getItem(preloadedImagesKey)) || [];
+                    let preloadingImages = JSON.parse(localStorage.getItem(preloadingImagesKey)) || [];
+
+                    // Be sure to exclude the current image from preloading!
+                    let excludedImages = preloadedImages.concat(preloadingImages, [currentImageId]);
+
+                    if (isPreload) {
+                        if (!preloadedImages.includes(currentImageId)) {
+                            preloadedImages.push(currentImageId);
+                        }
+
+                        preloadingImages = preloadingImages.filter(function(item) {
+                            return item !== currentImageId;
+                        });
+
+                        localStorage.setItem(preloadingImagesKey, JSON.stringify(preloadingImages));
+                        localStorage.setItem(preloadedImagesKey, JSON.stringify(preloadedImages));
+
+                        tiledImage.destroy(); // don't load more tiles during zoom and pan
+                    }
+
+                    // Exit early if we have enough images preloaded
+                    if (excludedImages.length > imagesToPreload) {
+                        return;
+                    }
+
+                    // We want the freshest data to determine what to cache next
+                    let savedResponse = JSON.parse(localStorage.getItem(savedResponseKey));
+
+                    // TODO: Preload next API response here if there's too few items remaining?
+                    if (savedResponse !== null && savedResponse.data.length > 0) {
+                        let nextArtwork = savedResponse.data.find(function(item) {
+                            return !excludedImages.includes(item.image_id);
+                        });
+
+                        if (nextArtwork) {
+                            preloadingImages.push(nextArtwork.image_id);
+                            localStorage.setItem(preloadingImagesKey, JSON.stringify(preloadingImages));
+                            addTiledImage(nextArtwork, true);
+                        }
+                    }
+                });
+            },
+        });
     }
 
     function getQuery() {

@@ -124,6 +124,19 @@
         addTiledImage(artwork, false);
     }
 
+    /**
+     * Work-around to encourage cache collision.
+     *
+     * https://openseadragon.github.io/examples/tilesource-legacy/
+     */
+    function getIIIFLevel(artwork, displayWidth) {
+      return {
+          url: 'https://www.artic.edu/iiif/2/' + artwork.image_id + '/full/' + displayWidth + ',/0/default.jpg',
+          width:  displayWidth,
+          height: Math.floor(artwork.thumbnail.height * displayWidth / artwork.thumbnail.width),
+      };
+    }
+
     function addTiledImage(artwork, isPreload) {
 
         // Save this so we can add it to our preload log
@@ -132,17 +145,13 @@
         // https://openseadragon.github.io/docs/OpenSeadragon.Viewer.html#addTiledImage
         viewer.addTiledImage({
             tileSource: {
-              "@context": "http://iiif.io/api/image/2/context.json",
-              "@id": 'https://www.artic.edu/iiif/2/' + currentImageId,
-              "width": artwork.thumbnail.width,
-              "height": artwork.thumbnail.height,
-              "profile": [ "http://iiif.io/api/image/2/level2.json" ],
-              "protocol": "http://iiif.io/api/image",
-              "tiles": [{
-                "scaleFactors": [ 1, 2, 4, 8, 16 ],
-                "width": artwork.thumbnail.width,
-                "width": artwork.thumbnail.height,
-              }]
+                type: 'legacy-image-pyramid',
+                levels: [
+                    getIIIFLevel(artwork, 200),
+                    getIIIFLevel(artwork, 400),
+                    getIIIFLevel(artwork, 843),
+                    getIIIFLevel(artwork, 1686),
+                ]
             },
             opacity: isPreload ? 0 : 1,
             preload: isPreload ? true : false,

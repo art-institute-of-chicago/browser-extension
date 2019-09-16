@@ -110,7 +110,8 @@
         let artistPrint = [artwork.artist_title, artwork.date_display].filter(function (el) {
             return el != null;
         }).join(', ');
-        let titlePrint = artwork.title;
+        let titlePrint = artwork.title ? artwork.title : "";
+
         let linkToArtwork = 'https://www.artic.edu/artworks/' + artwork.id + '/' + slugify(titlePrint);
 
         artistElement.innerHTML = artistPrint;

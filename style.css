@@ -19,8 +19,18 @@ body {
     height: 100%;
 }
 
-#artwork-container {
+#artwork-url {
     position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 80%;
+    height: 80%;
+    text-align: center;
+}
+
+#artwork-container {
+    position: relative;
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);

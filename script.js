@@ -120,6 +120,7 @@
         var downloadUrl = 'https://www.artic.edu/iiif/2/' + artwork.image_id + '/full/3000,/0/default.jpg'
         document.getElementById("download-link").setAttribute('href', downloadUrl);
         document.getElementById("download-link").setAttribute('download', titlePrint + '.jpg');
+        document.getElementById("artwork-url").setAttribute('href', linkToArtwork);
 
         addTiledImage(artwork, false);
     }

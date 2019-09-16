@@ -1,14 +1,14 @@
-![Art Institute of Chicago](https://raw.githubusercontent.com/Art-Institute-of-Chicago/template/master/aic-logo.gif)
+.![Art Institute of Chicago](https://raw.githubusercontent.com/Art-Institute-of-Chicago/template/master/aic-logo.gif)
 
-# Art Institute of Chicago Browser Extension (DRAFT)
+# Art Institute of Chicago Browser Extension
 
 > A browser extension that presents a random work of art from the Art Institute of Chicago's collection with each new tab.
 
-In September 2019, the Art Institute of Chicago (AIC) launched its first data API for public use. The API provides information and access to over 100,000 artworks. 
+In September 2019, the Art Institute of Chicago (AIC) launched its data API for public use. The API provides information and access to over 100,000 artworks.
 
 Using the data API and [IIIF's image API](https://iiif.io), AIC's browser extension presents an artwork from the museum's collection in your browser every time a new tab is opened. The extension focuses on selecting from over 50,000 works marked for [public domain](https://www.artic.edu/image-licensing) use.
 
-For public use, this extension is available in the Chrome Web Store [link]. 
+For public use, this extension is available in the Chrome Web Store [link]. If you'd like to install the plugin for local development, follow the instructions below.
 
 This repo serves as an example of using the Art Institute of Chicago's data API.
 
@@ -28,15 +28,15 @@ Chrome browser in Developer Mode
 Clone or download the project:
 
 ```shell
-git clone https://github.com/art-institute-of-chicago/aic-browser-extension.git
-cd aic-browser-extension
+git clone https://github.com/art-institute-of-chicago/browser-extension.git
+cd browser-extension
 ```
 
 * If you downloaded a zip file from GitHub, unzip the package
 * From Chrome menu choose Window - Extensions
 * Toggle on "Developer Mode"
 * Click "Load Unpacked"
-* Select the aic-browser-extension folder you cloned
+* Select the browser-extension folder you cloned
 * Optionally toggle "Developer Mode" off
 
 ![Screenshot of Chrome Windows menu with Extensions highlighted](docs/chrome-setup-1.jpg)
@@ -96,7 +96,7 @@ We encourage your contributions. Please fork this repository and make your chang
 
 ```bash
 # Clone the repo to your computer
-git clone git@github.com:your-github-account/aic-browser-extension.git
+git clone git@github.com:your-github-account/browser-extension.git
 
 # Enter the folder that was created by the clone
 cd browser-extension
@@ -120,18 +120,18 @@ We welcome bug reports and questions under GitHub's [Issues](issues). For other 
 
 ## Acknowledgements
 
+AIC's browser extension was conceived in the Experience Design department during the 2018 internship program, Diversifying Art Museum Leadership Initiative (DAMLI).
+Thanks to our intern, [Abdur Khan](https://github.com/AKhan139), for helping make this project possible.
+
+Additional thanks to [Mark Dascoli](https://github.com/markdascoli), [Illya Moskvin](https://github.com/IllyaMoskvin), [Tina Shah](https://github.com/surreal8), Kirsten Southwell, and [nikhil trivedi](https://github.com/nikhiltri), for helping complete version 1 of the browser extension.
+
 Inspiration for this project came from the following browser extension projects:
 - [David Rumsey Map Collection - MapTab](https://chrome.google.com/webstore/detail/david-rumsey-map-collecti/fnheacjohhlddiffbmafmpoblbkfgmde?hl=en)
 - [ueno.design](https://chrome.google.com/webstore/detail/uenodesign/iiekikakogelhkneknonedfhcajdlgda)
 - [Muzli 2 - Stay Inspired](https://chrome.google.com/webstore/detail/muzli-2-stay-inspired/glcipcfhmopcgidicgdociohdoicpdfc)
 
-AIC's browser extension was conceived in the Experience Design department during the 2018 internship program, Diversifying Art Museum Leadership Initiative (DAMLI). 
-Thanks to our intern, [Abdur Khan](https://github.com/AKhan139), for helping make this project possible.
-
 The following tutorial helped us get started:
 [How to Create and Publish a Chrome Extension in 20 minutes](https://www.freecodecamp.org/news/how-to-create-and-publish-a-chrome-extension-in-20-minutes-6dc8395d7153/) from [freeCodeCamp.org](https://freeCodeCamp.org)
-
-Additional thanks to [Mark Dascoli](https://github.com/markdascoli), [Illya Moskvin](https://github.com/IllyaMoskvin), [Tina Shah](https://github.com/surreal8), Kirsten Southwell, and [nikhil trivedi](https://github.com/nikhiltri), for helping complete version 1 of the browser extension.
 
 ## Licensing
 

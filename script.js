@@ -112,7 +112,7 @@
         }).join(', ');
         let titlePrint = artwork.title ? artwork.title : "";
 
-        let linkToArtwork = 'https://www.artic.edu/artworks/' + artwork.id + '/' + slugify(titlePrint);
+        let linkToArtwork = 'https://www.artic.edu/artworks/' + artwork.id + '/' + slugify(titlePrint) + '?utm_medium=chrome-extension&utm_source=' + titlePrint;
 
         artistElement.innerHTML = artistPrint;
         titleElement.innerHTML = titlePrint;

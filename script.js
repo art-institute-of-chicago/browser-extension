@@ -18,6 +18,8 @@
     let artworkContainer;
     let viewer;
 
+    let hasOverlay;
+
     document.addEventListener("DOMContentLoaded", function(event) {
         tombstoneElement = document.getElementById('tombstone');
         titleElement = document.getElementById('title');
@@ -191,6 +193,22 @@
                         tiledImage.destroy(); // don't load more tiles during zoom and pan
 
                         imagesPreloadedThisSession++;
+                    } else {
+
+                        if (hasOverlay) {
+                            viewer.removeOverlay('overlay');
+                            hasOverlay = false;
+                        }
+
+                        viewer.addOverlay({
+                            id: 'overlay',
+                            location: new OpenSeadragon.Point(),
+                            width: 1,
+                            height: artwork.thumbnail.height / artwork.thumbnail.width,
+                            className: 'highlight',
+                        });
+
+                        hasOverlay = true;
                     }
 
                     // Exit early if we have enough images preloaded

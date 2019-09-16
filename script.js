@@ -123,6 +123,9 @@
         document.getElementById("download-link").setAttribute('download', titlePrint + '.jpg');
         document.getElementById("artwork-url").setAttribute('href', linkToArtwork);
 
+        // Work-around for saving canvas images with white borders
+        document.getElementById('artwork-save-overlay').setAttribute('src', 'https://www.artic.edu/iiif/2/' + artwork.image_id + '/full/843,/0/default.jpg');;
+
         addTiledImage(artwork, false);
     }
 

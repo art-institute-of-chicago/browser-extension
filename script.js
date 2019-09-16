@@ -103,7 +103,7 @@
         localStorage.setItem(preloadingImagesKey, JSON.stringify(preloadingImages));
         localStorage.setItem(preloadedImagesKey, JSON.stringify(preloadedImages));
 
-        updatePage(response.data[0]);
+        updatePage(artwork);
     }
 
     function updatePage(artwork) {

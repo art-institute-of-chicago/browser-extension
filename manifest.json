@@ -5,14 +5,19 @@
     "version": "1.0",
     "author": "AIC",
     "browser_action": {
-        "default_icon": "assets/aicLogo.png",
+        "default_icon": "assets/logo--icon--16.png",
         "default_title": "Art Institute of Chicago"
     },
-    "content_security_policy": "script-src 'self' https://cdn.jsdelivr.net https://ssl.google-analytics.com; object-src 'self'",
+    "content_security_policy": "script-src 'self' unsafe-inline https://cdn.jsdelivr.net https://ssl.google-analytics.com; object-src 'self'",
     "chrome_url_overrides": {
         "newtab": "newtab.html"
     },
     "permissions": [
         "activeTab"
-    ]
+    ],
+    "icons": {
+        "16": "assets/logo--icon--16.png",
+        "48": "assets/logo--icon--48.png",
+        "128": "assets/logo--icon--128.png"
+    }
 }

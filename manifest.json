@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
     "name": "Art Institute of Chicago: Art Tab",
-    "description": "Explore the Art Institute of Chicago's Collection",
+    "description": "See a random artwork from the Art Institute of Chicago's vast collection every time you open a new tab. ",
     "version": "1.0",
     "author": "AIC",
     "browser_action": {

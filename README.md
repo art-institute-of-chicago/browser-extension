@@ -8,7 +8,7 @@ In September 2019, the Art Institute of Chicago (AIC) launched its data API for 
 
 Using the data API and [IIIF's image API](https://iiif.io), AIC's browser extension presents an artwork from the museum's collection in your browser every time a new tab is opened. The extension focuses on selecting from over 50,000 works marked for [public domain](https://www.artic.edu/image-licensing) use.
 
-For public use, this extension is available in the Chrome Web Store [link]. If you'd like to install the plugin for local development, follow the instructions below.
+For public use, this extension is available in the [Chrome Web Store](https://chrome.google.com/webstore/detail/art-institute-of-chicago/abacageipbknolldcoehafgfjamoejad). If you'd like to install the plugin for local development, follow the instructions below.
 
 This repo serves as an example of using the Art Institute of Chicago's data API.
 

@@ -10,7 +10,7 @@
     },
     "content_security_policy": "script-src 'self' unsafe-inline https://cdn.jsdelivr.net https://ssl.google-analytics.com; object-src 'self'",
     "chrome_url_overrides": {
-        "newtab": "newtab.html"
+        "newtab": "index.html"
     },
     "permissions": [
         "activeTab"

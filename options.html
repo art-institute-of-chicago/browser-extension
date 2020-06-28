@@ -4,8 +4,32 @@
         <link rel="stylesheet" type="text/css" href="option.css" />
     </head>
     <body>
-        <div class="filter-option">
-            <p>Date</p>
+        <div>
+            <div class="filter-option">
+                <div class="filter-option-header">
+                    <span>Date</span>
+                </div>
+                <p class="filter-option-description">
+                    Specify the date range of the generated artwork
+                </p>
+                <div class="range-slider__custom-row">
+                    <input
+                        type="num"
+                        id="rangeFrom"
+                        name="rangeFrom"
+                        data-range-custom-from=""
+                        class="range-slider__custom-input"
+                    />
+
+                    <input
+                        type="num"
+                        id="rangeTo"
+                        name="rangeTo"
+                        data-range-custom-to=""
+                        class="range-slider__custom-input"
+                    />
+                </div>
+            </div>
         </div>
         <button id="submit-button">OK</button>
     </body>

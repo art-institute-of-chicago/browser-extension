@@ -1,3 +1,10 @@
+#filter-footer {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
 #submit-button {
     -webkit-font-smoothing: antialiased;
     font-kerning: normal;
@@ -8,13 +15,12 @@
     letter-spacing: 0.14em;
     text-transform: uppercase;
     font-feature-settings: "lnum" on;
-    font-size: 12px;
+    font-size: 16px;
     line-height: 16px;
-    display: inline-block;
     margin-top: 24px;
-    padding: 8px 12px;
+    padding: 10px 24px;
     border: 0;
-    border-radius: 2px;
+    border-radius: 4px;
     background-color: #f3f3f3;
     color: #767676;
     text-align: center;

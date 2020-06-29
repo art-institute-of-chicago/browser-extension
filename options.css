@@ -18,6 +18,7 @@
     font-size: 16px;
     line-height: 16px;
     margin-top: 24px;
+    outline: none;
     padding: 10px 24px;
     border: 0;
     border-radius: 4px;
@@ -28,6 +29,13 @@
     white-space: nowrap;
     cursor: pointer;
     -webkit-appearance: none;
+    font-family: "Ideal Sans A", "Ideal Sans B", Helvetica, Arial, sans-serif;
+}
+
+#filter-status {
+    font-feature-settings: "lnum" on;
+    font-size: 16px;
+    color: #767676;
     font-family: "Ideal Sans A", "Ideal Sans B", Helvetica, Arial, sans-serif;
 }
 

@@ -1,19 +1,19 @@
 // Saves options to chrome.storage
 function save_options() {
-    var color = document.getElementById("color").value;
-    var likesColor = document.getElementById("like").checked;
+    var dateRangeFrom = document.getElementById("dateRangeFrom").value;
+    var dateRangeTo = document.getElementById("dateRangeTo").value;
     chrome.storage.sync.set(
         {
-            favoriteColor: color,
-            likesColor: likesColor
+            dateRangeFrom,
+            dateRangeTo
         },
         function() {
             // Update status to let user know options were saved.
-            var status = document.getElementById("status");
-            status.textContent = "Options saved.";
+            var status = document.getElementById("filter-status");
+            status.textContent = "Options saved!";
             setTimeout(function() {
                 status.textContent = "";
-            }, 750);
+            }, 1000);
         }
     );
 }
@@ -24,14 +24,17 @@ function restore_options() {
     // Use default value color = 'red' and likesColor = true.
     chrome.storage.sync.get(
         {
-            favoriteColor: "red",
-            likesColor: true
+            dateRangeFrom: "8000 BCE",
+            dateRangeTo: "Present"
         },
         function(items) {
-            document.getElementById("color").value = items.favoriteColor;
-            document.getElementById("like").checked = items.likesColor;
+            document.getElementById("dateRangeFrom").value =
+                items.dateRangeFrom;
+            document.getElementById("dateRangeTo").value = items.dateRangeTo;
         }
     );
 }
 document.addEventListener("DOMContentLoaded", restore_options);
-document.getElementById("save").addEventListener("click", save_options);
+document
+    .getElementById("submit-button")
+    .addEventListener("click", save_options);

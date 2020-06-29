@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="stylesheet" type="text/css" href="option.css" />
+        <link rel="stylesheet" type="text/css" href="options.css" />
     </head>
     <body>
         <div>
@@ -15,7 +15,7 @@
                 <div class="range-slider__custom-row">
                     <input
                         type="num"
-                        id="rangeFrom"
+                        id="dateRangeFrom"
                         name="rangeFrom"
                         data-range-custom-from=""
                         class="range-slider__custom-input"
@@ -23,7 +23,7 @@
 
                     <input
                         type="num"
-                        id="rangeTo"
+                        id="dateRangeTo"
                         name="rangeTo"
                         data-range-custom-to=""
                         class="range-slider__custom-input"
@@ -34,5 +34,7 @@
         <div id="filter-footer">
             <button id="submit-button">OK</button>
         </div>
+        <div id="filter-status"></div>
     </body>
+    <script src="options.js"></script>
 </html>

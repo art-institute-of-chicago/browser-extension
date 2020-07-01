@@ -24,8 +24,8 @@ function restore_options() {
     // Use default value color = 'red' and likesColor = true.
     chrome.storage.sync.get(
         {
-            dateRangeFrom: "8000 BCE",
-            dateRangeTo: "Present"
+            dateRangeFrom: "-8000",
+            dateRangeTo: "2020"
         },
         function(items) {
             document.getElementById("dateRangeFrom").value =
@@ -34,7 +34,51 @@ function restore_options() {
         }
     );
 }
+
+function disableSubmitButton() {
+    document.getElementById("submit-button").disabled = true;
+}
+
+function enableSubmitButton() {
+    document.getElementById("submit-button").disabled = false;
+}
+
+function validateDateInputs() {
+    const dateRangeFromInput = document.getElementById("dateRangeFrom");
+    const dateRangeToInput = document.getElementById("dateRangeTo");
+
+    const dateRangeFrom = Number(dateRangeFromInput.value);
+    const dateRangeTo = Number(dateRangeToInput.value);
+
+    if (dateRangeFrom < -8000) {
+        dateRangeFromInput.style.borderColor = "red";
+        return false;
+    } else if (dateRangeFrom > dateRangeTo) {
+        dateRangeFromInput.style.borderColor = "red";
+        dateRangeToInput.style.borderColor = "red";
+        return false;
+    } else if (dateRangeTo < -8000 || dateRangeTo > new Date().getFullYear()) {
+        dateRangeToInput.style.borderColor = "red";
+        return false;
+    }
+    dateRangeFromInput.style.borderColor = "initial";
+    dateRangeToInput.style.borderColor = "initial";
+    return true;
+}
+
+function validate() {
+    if (!validateDateInputs()) {
+        disableSubmitButton();
+        return;
+    }
+    enableSubmitButton();
+}
+
 document.addEventListener("DOMContentLoaded", restore_options);
 document
     .getElementById("submit-button")
     .addEventListener("click", save_options);
+
+document.getElementById("dateRangeFrom").addEventListener("change", validate);
+
+document.getElementById("dateRangeTo").addEventListener("change", validate);

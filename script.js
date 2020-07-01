@@ -52,7 +52,8 @@
 
         // https://developer.mozilla.org/en-US/docs/Web/API/Storage/getItem
         // ...returns `null` if not found. JSON.parsing `null` also returns `null`
-        let savedResponse = JSON.parse(localStorage.getItem(savedResponseKey));
+        //let savedResponse = JSON.parse(localStorage.getItem(savedResponseKey));
+        savedResponse = null;
 
         if (savedResponse !== null) {
             if (savedResponse.data.length > 0) {
@@ -62,14 +63,13 @@
 
         chrome.storage.sync.get(
             {
-                dateRangeFrom: "8000 BCE",
-                dateRangeTo: "Present"
+                dateRangeFrom: "-8000",
+                dateRangeTo: String(new Date().getFullYear())
             },
             function(options) {
-                console.log("OPTIONS:", options);
                 getJson(
                     "https://api.artic.edu/api/v1/search",
-                    getQuery(),
+                    getQuery(options),
                     processResponse
                 );
             }
@@ -298,7 +298,8 @@
         });
     }
 
-    function getQuery() {
+    function getQuery(options) {
+        console.log("OPTIONS", options);
         return {
             resources: "artworks",
             fields: [
@@ -316,6 +317,20 @@
                     query: {
                         bool: {
                             filter: [
+                                {
+                                    range: {
+                                        date_start: {
+                                            gte: Number(options.dateRangeFrom)
+                                        }
+                                    }
+                                },
+                                {
+                                    range: {
+                                        date_end: {
+                                            lte: Number(options.dateRangeTo)
+                                        }
+                                    }
+                                },
                                 {
                                     term: {
                                         is_public_domain: true

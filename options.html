@@ -10,11 +10,13 @@
                     <span>Date</span>
                 </div>
                 <p class="filter-option-description">
-                    Specify the date range of the generated artwork
+                    Specify the date range of the generated artwork (in years)
                 </p>
                 <div class="range-slider__custom-row">
                     <input
-                        type="num"
+                        type="number"
+                        min="-8000"
+                        placeholder="Min: e.g. -8000"
                         id="dateRangeFrom"
                         name="rangeFrom"
                         data-range-custom-from=""
@@ -22,7 +24,9 @@
                     />
 
                     <input
-                        type="num"
+                        type="number"
+                        min="-8000"
+                        placeholder="Max: e.g. 1900"
                         id="dateRangeTo"
                         name="rangeTo"
                         data-range-custom-to=""

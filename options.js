@@ -35,14 +35,6 @@ function restore_options() {
     );
 }
 
-function disableSubmitButton() {
-    document.getElementById("submit-button").disabled = true;
-}
-
-function enableSubmitButton() {
-    document.getElementById("submit-button").disabled = false;
-}
-
 function validateDateInputs() {
     const dateRangeFromInput = document.getElementById("dateRangeFrom");
     const dateRangeToInput = document.getElementById("dateRangeTo");
@@ -68,10 +60,11 @@ function validateDateInputs() {
 
 function validate() {
     if (!validateDateInputs()) {
-        disableSubmitButton();
+        document.getElementById("submit-button").disabled = true;
         return;
     }
-    enableSubmitButton();
+
+    document.getElementById("submit-button").disabled = false;
 }
 
 document.addEventListener("DOMContentLoaded", restore_options);

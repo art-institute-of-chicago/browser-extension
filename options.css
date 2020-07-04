@@ -6,30 +6,24 @@
 }
 
 #submit-button {
-    -webkit-font-smoothing: antialiased;
-    font-kerning: normal;
-    text-size-adjust: 100%;
-    -webkit-box-direction: normal;
-    box-sizing: inherit;
-    touch-action: inherit;
     letter-spacing: 0.14em;
     text-transform: uppercase;
     font-feature-settings: "lnum" on;
     font-size: 16px;
     line-height: 16px;
     margin-top: 24px;
-    outline: none;
     padding: 10px 24px;
     border: 0;
     border-radius: 4px;
     background-color: #f3f3f3;
     color: #767676;
     text-align: center;
-    text-decoration: none;
-    white-space: nowrap;
     cursor: pointer;
-    -webkit-appearance: none;
-    font-family: "Ideal Sans A", "Ideal Sans B", Helvetica, Arial, sans-serif;
+}
+
+#submit-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
 }
 
 #filter-status {

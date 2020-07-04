@@ -8,10 +8,10 @@
 #submit-button {
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    font-feature-settings: "lnum" on;
     font-size: 16px;
     line-height: 16px;
     margin-top: 24px;
+    outline: none;
     padding: 10px 24px;
     border: 0;
     border-radius: 4px;
@@ -27,69 +27,37 @@
 }
 
 #filter-status {
-    font-feature-settings: "lnum" on;
-    font-size: 16px;
-    color: #767676;
+    font-size: 14px;
     font-family: "Ideal Sans A", "Ideal Sans B", Helvetica, Arial, sans-serif;
 }
 
 .filter-option {
-    text-rendering: optimizeLegibility;
-    text-size-adjust: 100%;
-    -webkit-box-direction: normal;
-    box-sizing: inherit;
-    touch-action: inherit;
     position: relative;
-    padding-right: 60px;
-    padding-left: 0;
-    color: #1a1a1a;
     width: 100%;
     text-align: left;
-    background-color: #fff;
     font-family: "Ideal Sans A", "Ideal Sans B", Helvetica, Arial, sans-serif;
     padding-bottom: 16px;
     margin-top: 10px;
 }
 
 .filter-option-header {
-    -webkit-font-smoothing: antialiased;
-    font-kerning: normal;
-    text-rendering: optimizeLegibility;
-    text-size-adjust: 100%;
-    -webkit-box-direction: normal;
-    box-sizing: inherit;
-    touch-action: inherit;
     font: inherit;
     vertical-align: baseline;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    font-feature-settings: "lnum" on;
     font-size: 16px;
     position: relative;
-    padding-right: 60px;
-    padding-left: 0;
-    color: #1a1a1a;
     width: 100%;
     text-align: left;
-    background-color: #fff;
     font-family: "Ideal Sans A", "Ideal Sans B", Helvetica, Arial, sans-serif;
 }
 
 .filter-option-description {
     margin: 5px 0px 10px 0px;
-    -webkit-font-smoothing: antialiased;
-    font-kerning: normal;
-    text-size-adjust: 100%;
-    -webkit-box-direction: normal;
-    touch-action: inherit;
-    font-feature-settings: "lnum" on;
     font-size: 12px;
     display: inline-block;
     color: #767676;
     text-align: center;
-    text-decoration: none;
-    white-space: nowrap;
-    -webkit-appearance: none;
     font-family: "Ideal Sans A", "Ideal Sans B", Helvetica, Arial, sans-serif;
 }
 
@@ -99,15 +67,8 @@
 }
 
 .range-slider__custom-input {
-    -webkit-font-smoothing: antialiased;
-    font-kerning: normal;
-    text-size-adjust: 100%;
-    -webkit-box-direction: normal;
-    box-sizing: inherit;
-    touch-action: inherit;
     font-weight: 300;
     letter-spacing: 0.01em;
-    font-feature-settings: "lnum" on;
     font-size: 14px;
     line-height: 28px;
     width: 100%;
@@ -116,9 +77,6 @@
     padding: 2px 10px 4px;
     border: 1px solid #ccc;
     border-radius: 2px;
-    background-color: #fff;
     color: #767676;
-    -webkit-appearance: none;
-    font-variant-numeric: lining-nums;
     font-family: "Ideal Sans A", "Ideal Sans B", Helvetica, Arial, sans-serif;
 }

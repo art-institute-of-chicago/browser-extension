@@ -16,8 +16,8 @@ This repo serves as an example of using the Art Institute of Chicago's data API.
 
 ## Features
 
-* Presents artwork from the Art Institute's collection in new browser tab
-* Demonstrates use of the Art Institute's data API
+- Presents artwork from the Art Institute's collection in new browser tab
+- Demonstrates use of the Art Institute's data API
 
 ## Requirements
 
@@ -32,12 +32,12 @@ git clone https://github.com/art-institute-of-chicago/browser-extension.git
 cd browser-extension
 ```
 
-* If you downloaded a zip file from GitHub, unzip the package
-* From Chrome menu choose Window - Extensions
-* Toggle on "Developer Mode"
-* Click "Load Unpacked"
-* Select the browser-extension folder you cloned
-* Optionally toggle "Developer Mode" off
+- If you downloaded a zip file from GitHub, unzip the package
+- From Chrome menu choose Window - Extensions
+- Toggle on "Developer Mode"
+- Click "Load Unpacked"
+- Select the browser-extension folder you cloned
+- Optionally toggle "Developer Mode" off
 
 ![Screenshot of Chrome Windows menu with Extensions highlighted](docs/chrome-setup-1.jpg)
 
@@ -126,6 +126,7 @@ Thanks to our intern, [Abdur Khan](https://github.com/AKhan139), for helping mak
 Additional thanks to [Mark Dascoli](https://github.com/markdascoli), [Illya Moskvin](https://github.com/IllyaMoskvin), [Tina Shah](https://github.com/surreal8), Kirsten Southwell, and [nikhil trivedi](https://github.com/nikhiltri), for helping complete version 1 of the browser extension.
 
 Inspiration for this project came from the following browser extension projects:
+
 - [David Rumsey Map Collection - MapTab](https://chrome.google.com/webstore/detail/david-rumsey-map-collecti/fnheacjohhlddiffbmafmpoblbkfgmde?hl=en)
 - [ueno.design](https://chrome.google.com/webstore/detail/uenodesign/iiekikakogelhkneknonedfhcajdlgda)
 - [Muzli 2 - Stay Inspired](https://chrome.google.com/webstore/detail/muzli-2-stay-inspired/glcipcfhmopcgidicgdociohdoicpdfc)

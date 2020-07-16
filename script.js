@@ -1,8 +1,8 @@
 (function () {
     // LocalStorage keys for reference
-    const savedResponseKey = "response";
-    const preloadedImagesKey = "preloaded";
-    const preloadingImagesKey = "preloading";
+    const savedResponseKey = 'response';
+    const preloadedImagesKey = 'preloaded';
+    const preloadingImagesKey = 'preloading';
 
     // Settings for cache aggressiveness
     const artworksToPrefetch = 50;
@@ -17,16 +17,16 @@
     let artworkContainer;
     let viewer;
 
-    document.addEventListener("DOMContentLoaded", function (event) {
-        tombstoneElement = document.getElementById("tombstone");
-        titleElement = document.getElementById("title");
-        artistElement = document.getElementById("artist");
-        artworkContainer = document.getElementById("artwork-container");
+    document.addEventListener('DOMContentLoaded', function (event) {
+        tombstoneElement = document.getElementById('tombstone');
+        titleElement = document.getElementById('title');
+        artistElement = document.getElementById('artist');
+        artworkContainer = document.getElementById('artwork-container');
 
         viewer = OpenSeadragon({
             element: artworkContainer,
-            xmlns: "http://schemas.microsoft.com/deepzoom/2008",
-            prefixUrl: "//openseadragon.github.io/openseadragon/images/",
+            xmlns: 'http://schemas.microsoft.com/deepzoom/2008',
+            prefixUrl: '//openseadragon.github.io/openseadragon/images/',
             homeFillsViewer: false,
             mouseNavEnabled: false,
             springStiffness: 15,
@@ -61,7 +61,7 @@
         }
 
         getJson(
-            "https://aggregator-data.artic.edu/api/v1/search",
+            'https://aggregator-data.artic.edu/api/v1/search',
             getQuery(),
             processResponse
         );
@@ -69,8 +69,8 @@
 
     function getJson(url, body, callback) {
         let request = new XMLHttpRequest();
-        request.open("POST", url, true);
-        request.setRequestHeader("Content-Type", "application/json");
+        request.open('POST', url, true);
+        request.setRequestHeader('Content-Type', 'application/json');
         request.onreadystatechange = function () {
             if (this.readyState === 4 && this.status === 200) {
                 callback(JSON.parse(this.responseText));
@@ -122,43 +122,43 @@
             .filter(function (el) {
                 return el != null;
             })
-            .join(", ");
-        let titlePrint = artwork.title ? artwork.title : "";
+            .join(', ');
+        let titlePrint = artwork.title ? artwork.title : '';
 
         let linkToArtwork =
-            "https://www.artic.edu/artworks/" +
+            'https://www.artic.edu/artworks/' +
             artwork.id +
-            "/" +
+            '/' +
             slugify(titlePrint) +
-            "?utm_medium=chrome-extension&utm_source=" +
+            '?utm_medium=chrome-extension&utm_source=' +
             titlePrint;
 
         artistElement.innerHTML = artistPrint;
         titleElement.innerHTML = titlePrint;
-        tombstoneElement.setAttribute("href", linkToArtwork);
+        tombstoneElement.setAttribute('href', linkToArtwork);
 
         var downloadUrl =
-            "https://www.artic.edu/iiif/2/" +
+            'https://www.artic.edu/iiif/2/' +
             artwork.image_id +
-            "/full/3000,/0/default.jpg";
+            '/full/3000,/0/default.jpg';
         document
-            .getElementById("download-link")
-            .setAttribute("href", downloadUrl);
+            .getElementById('download-link')
+            .setAttribute('href', downloadUrl);
         document
-            .getElementById("download-link")
-            .setAttribute("download", titlePrint + ".jpg");
+            .getElementById('download-link')
+            .setAttribute('download', titlePrint + '.jpg');
         document
-            .getElementById("artwork-url")
-            .setAttribute("href", linkToArtwork);
+            .getElementById('artwork-url')
+            .setAttribute('href', linkToArtwork);
 
         // Work-around for saving canvas images with white borders
         document
-            .getElementById("artwork-save-overlay")
+            .getElementById('artwork-save-overlay')
             .setAttribute(
-                "src",
-                "https://www.artic.edu/iiif/2/" +
+                'src',
+                'https://www.artic.edu/iiif/2/' +
                     artwork.image_id +
-                    "/full/843,/0/default.jpg"
+                    '/full/843,/0/default.jpg'
             );
 
         addTiledImage(artwork, false);
@@ -172,11 +172,11 @@
     function getIIIFLevel(artwork, displayWidth) {
         return {
             url:
-                "https://www.artic.edu/iiif/2/" +
+                'https://www.artic.edu/iiif/2/' +
                 artwork.image_id +
-                "/full/" +
+                '/full/' +
                 displayWidth +
-                ",/0/default.jpg",
+                ',/0/default.jpg',
             width: displayWidth,
             height: Math.floor(
                 (artwork.thumbnail.height * displayWidth) /
@@ -192,7 +192,7 @@
         // https://openseadragon.github.io/docs/OpenSeadragon.Viewer.html#addTiledImage
         viewer.addTiledImage({
             tileSource: {
-                type: "legacy-image-pyramid",
+                type: 'legacy-image-pyramid',
                 levels: [
                     getIIIFLevel(artwork, 200),
                     getIIIFLevel(artwork, 400),
@@ -204,13 +204,13 @@
             preload: isPreload ? true : false,
             success: function (event) {
                 // https://openseadragon.github.io/docs/OpenSeadragon.TiledImage.html#.event:fully-loaded-change
-                event.item.addHandler("fully-loaded-change", function (
+                event.item.addHandler('fully-loaded-change', function (
                     callbackObject
                 ) {
                     let tiledImage = callbackObject.eventSource;
 
                     // We don't want this to fire on every zoom and pan
-                    tiledImage.removeAllHandlers("fully-loaded-change");
+                    tiledImage.removeAllHandlers('fully-loaded-change');
 
                     // We want to check LocalStorage each time in case multiple new tabs are preloading
                     let preloadedImages =
@@ -291,14 +291,14 @@
 
     function getQuery() {
         return {
-            resources: "artworks",
+            resources: 'artworks',
             fields: [
-                "id",
-                "title",
-                "artist_title",
-                "image_id",
-                "date_display",
-                "thumbnail",
+                'id',
+                'title',
+                'artist_title',
+                'image_id',
+                'date_display',
+                'thumbnail',
             ],
             boost: false,
             limit: artworksToPrefetch,
@@ -314,25 +314,25 @@
                                 },
                                 {
                                     exists: {
-                                        field: "image_id",
+                                        field: 'image_id',
                                     },
                                 },
                                 {
                                     exists: {
-                                        field: "thumbnail.width",
+                                        field: 'thumbnail.width',
                                     },
                                 },
                                 {
                                     exists: {
-                                        field: "thumbnail.height",
+                                        field: 'thumbnail.height',
                                     },
                                 },
                             ],
                         },
                     },
-                    boost_mode: "replace",
+                    boost_mode: 'replace',
                     random_score: {
-                        field: "id",
+                        field: 'id',
                         seed: getSeed(),
                     },
                 },
@@ -356,23 +356,23 @@
         return text
             .toString()
             .toLowerCase()
-            .replace(/\s+/g, "-") // Replace spaces with -
-            .replace(/[^\w\-]+/g, "") // Remove all non-word chars
-            .replace(/\-\-+/g, "-") // Replace multiple - with single -
-            .replace(/^-+/, "") // Trim - from start of text
-            .replace(/-+$/, ""); // Trim - from end of text
+            .replace(/\s+/g, '-') // Replace spaces with -
+            .replace(/[^\w\-]+/g, '') // Remove all non-word chars
+            .replace(/\-\-+/g, '-') // Replace multiple - with single -
+            .replace(/^-+/, '') // Trim - from start of text
+            .replace(/-+$/, ''); // Trim - from end of text
     }
 })();
 
 var _gaq = _gaq || [];
-_gaq.push(["_setAccount", "UA-4351925-30"]);
-_gaq.push(["_trackPageview"]);
+_gaq.push(['_setAccount', 'UA-4351925-30']);
+_gaq.push(['_trackPageview']);
 
 (function () {
-    var ga = document.createElement("script");
-    ga.type = "text/javascript";
+    var ga = document.createElement('script');
+    ga.type = 'text/javascript';
     ga.async = true;
-    ga.src = "https://ssl.google-analytics.com/ga.js";
-    var s = document.getElementsByTagName("script")[0];
+    ga.src = 'https://ssl.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0];
     s.parentNode.insertBefore(ga, s);
 })();

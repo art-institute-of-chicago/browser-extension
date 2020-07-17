@@ -60,11 +60,7 @@
             }
         }
 
-        getJson(
-            'https://aggregator-data.artic.edu/api/v1/search',
-            getQuery(),
-            processResponse
-        );
+        getJson('https://aggregator-data.artic.edu/api/v1/search', getQuery(), processResponse);
     });
 
     function getJson(url, body, callback) {
@@ -92,10 +88,8 @@
             return item.image_id;
         });
 
-        let preloadedImages =
-            JSON.parse(localStorage.getItem(preloadedImagesKey)) || [];
-        let preloadingImages =
-            JSON.parse(localStorage.getItem(preloadingImagesKey)) || [];
+        let preloadedImages = JSON.parse(localStorage.getItem(preloadedImagesKey)) || [];
+        let preloadingImages = JSON.parse(localStorage.getItem(preloadingImagesKey)) || [];
 
         preloadedImages = preloadedImages.filter(function (item) {
             return imageIdsInResponse.includes(item);
@@ -105,14 +99,8 @@
             return imageIdsInResponse.includes(item);
         });
 
-        localStorage.setItem(
-            preloadingImagesKey,
-            JSON.stringify(preloadingImages)
-        );
-        localStorage.setItem(
-            preloadedImagesKey,
-            JSON.stringify(preloadedImages)
-        );
+        localStorage.setItem(preloadingImagesKey, JSON.stringify(preloadingImages));
+        localStorage.setItem(preloadedImagesKey, JSON.stringify(preloadedImages));
 
         updatePage(artwork);
     }
@@ -123,43 +111,30 @@
                 return el != null;
             })
             .join(', ');
+
         let titlePrint = artwork.title ? artwork.title : '';
 
-        let linkToArtwork =
-            'https://www.artic.edu/artworks/' +
-            artwork.id +
-            '/' +
-            slugify(titlePrint) +
-            '?utm_medium=chrome-extension&utm_source=' +
-            titlePrint;
+        let linkToArtwork = 'https://www.artic.edu/artworks/' + artwork.id + '/' + slugify(titlePrint);
+
+        // Track referrals from the extension in analytics
+        linkToArtwork += '?utm_medium=chrome-extension&utm_source=' + titlePrint;
 
         artistElement.innerHTML = artistPrint;
         titleElement.innerHTML = titlePrint;
         tombstoneElement.setAttribute('href', linkToArtwork);
 
-        var downloadUrl =
-            'https://www.artic.edu/iiif/2/' +
-            artwork.image_id +
-            '/full/3000,/0/default.jpg';
-        document
-            .getElementById('download-link')
-            .setAttribute('href', downloadUrl);
-        document
-            .getElementById('download-link')
-            .setAttribute('download', titlePrint + '.jpg');
-        document
-            .getElementById('artwork-url')
-            .setAttribute('href', linkToArtwork);
+        var downloadUrl = 'https://www.artic.edu/iiif/2/' + artwork.image_id + '/full/3000,/0/default.jpg';
+
+        document.getElementById('download-link').setAttribute('href', downloadUrl);
+
+        document.getElementById('download-link').setAttribute('download', titlePrint + '.jpg');
+
+        document.getElementById('artwork-url').setAttribute('href', linkToArtwork);
 
         // Work-around for saving canvas images with white borders
         document
             .getElementById('artwork-save-overlay')
-            .setAttribute(
-                'src',
-                'https://www.artic.edu/iiif/2/' +
-                    artwork.image_id +
-                    '/full/843,/0/default.jpg'
-            );
+            .setAttribute('src', 'https://www.artic.edu/iiif/2/' + artwork.image_id + '/full/843,/0/default.jpg');
 
         addTiledImage(artwork, false);
     }
@@ -171,17 +146,9 @@
      */
     function getIIIFLevel(artwork, displayWidth) {
         return {
-            url:
-                'https://www.artic.edu/iiif/2/' +
-                artwork.image_id +
-                '/full/' +
-                displayWidth +
-                ',/0/default.jpg',
+            url: 'https://www.artic.edu/iiif/2/' + artwork.image_id + '/full/' + displayWidth + ',/0/default.jpg',
             width: displayWidth,
-            height: Math.floor(
-                (artwork.thumbnail.height * displayWidth) /
-                    artwork.thumbnail.width
-            ),
+            height: Math.floor((artwork.thumbnail.height * displayWidth) / artwork.thumbnail.width),
         };
     }
 
@@ -204,47 +171,30 @@
             preload: isPreload ? true : false,
             success: function (event) {
                 // https://openseadragon.github.io/docs/OpenSeadragon.TiledImage.html#.event:fully-loaded-change
-                event.item.addHandler('fully-loaded-change', function (
-                    callbackObject
-                ) {
+                event.item.addHandler('fully-loaded-change', function (callbackObject) {
                     let tiledImage = callbackObject.eventSource;
 
                     // We don't want this to fire on every zoom and pan
                     tiledImage.removeAllHandlers('fully-loaded-change');
 
                     // We want to check LocalStorage each time in case multiple new tabs are preloading
-                    let preloadedImages =
-                        JSON.parse(localStorage.getItem(preloadedImagesKey)) ||
-                        [];
-                    let preloadingImages =
-                        JSON.parse(localStorage.getItem(preloadingImagesKey)) ||
-                        [];
+                    let preloadedImages = JSON.parse(localStorage.getItem(preloadedImagesKey)) || [];
+                    let preloadingImages = JSON.parse(localStorage.getItem(preloadingImagesKey)) || [];
 
                     // Be sure to exclude the current image from preloading!
-                    let excludedImages = preloadedImages.concat(
-                        preloadingImages,
-                        [currentImageId]
-                    );
+                    let excludedImages = preloadedImages.concat(preloadingImages, [currentImageId]);
 
                     if (isPreload) {
                         if (!preloadedImages.includes(currentImageId)) {
                             preloadedImages.push(currentImageId);
                         }
 
-                        preloadingImages = preloadingImages.filter(function (
-                            item
-                        ) {
+                        preloadingImages = preloadingImages.filter(function (item) {
                             return item !== currentImageId;
                         });
 
-                        localStorage.setItem(
-                            preloadingImagesKey,
-                            JSON.stringify(preloadingImages)
-                        );
-                        localStorage.setItem(
-                            preloadedImagesKey,
-                            JSON.stringify(preloadedImages)
-                        );
+                        localStorage.setItem(preloadingImagesKey, JSON.stringify(preloadingImages));
+                        localStorage.setItem(preloadedImagesKey, JSON.stringify(preloadedImages));
 
                         tiledImage.destroy(); // don't load more tiles during zoom and pan
 
@@ -260,27 +210,17 @@
                     }
 
                     // We want the freshest data to determine what to cache next
-                    let savedResponse = JSON.parse(
-                        localStorage.getItem(savedResponseKey)
-                    );
+                    let savedResponse = JSON.parse(localStorage.getItem(savedResponseKey));
 
                     // TODO: Preload next API response here if there's too few items remaining?
-                    if (
-                        savedResponse !== null &&
-                        savedResponse.data.length > 0
-                    ) {
-                        let nextArtwork = savedResponse.data.find(function (
-                            item
-                        ) {
+                    if (savedResponse !== null && savedResponse.data.length > 0) {
+                        let nextArtwork = savedResponse.data.find(function (item) {
                             return !excludedImages.includes(item.image_id);
                         });
 
                         if (nextArtwork) {
                             preloadingImages.push(nextArtwork.image_id);
-                            localStorage.setItem(
-                                preloadingImagesKey,
-                                JSON.stringify(preloadingImages)
-                            );
+                            localStorage.setItem(preloadingImagesKey, JSON.stringify(preloadingImages));
                             addTiledImage(nextArtwork, true);
                         }
                     }
@@ -292,6 +232,7 @@
     function getQuery() {
         return {
             resources: 'artworks',
+            // prettier-ignore
             fields: [
                 'id',
                 'title',

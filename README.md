@@ -101,6 +101,9 @@ git clone git@github.com:your-github-account/browser-extension.git
 # Enter the folder that was created by the clone
 cd browser-extension
 
+# Install dependencies (we use Yarn)
+yarn install --frozen-lockfile
+
 # Start a feature branch
 git checkout -b feature/good-short-description
 
@@ -117,6 +120,19 @@ This project is released with a Contributor Code of Conduct. By participating in
 this project you agree to abide by its [terms](CODE_OF_CONDUCT.md).
 
 We welcome bug reports and questions under GitHub's [Issues](issues). For other concerns, you can reach our engineering team at [engineering@artic.edu](mailto:engineering@artic.edu)
+
+### Code Formatting
+
+We use [Prettier](https://prettier.io/) to perform standard formatting across
+all the JS, CSS, HTML, and Markdown files in the project. If you've installed
+the project dependencies correctly with Yarn, a pre-commit hook that formats all
+your staged files _should_ automatically execute when you run `git commit`.
+
+Alternatively, you could manually run Prettier like so:
+
+```bash
+yarn prettier --write "$(pwd)/**/*.(js|css|html|md)
+```
 
 ## Acknowledgements
 

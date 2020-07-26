@@ -1,0 +1,22 @@
+{
+    "name": "browser-extension",
+    "version": "1.0.0",
+    "main": "index.js",
+    "repository": "https://github.com/art-institute-of-chicago/browser-extension.git",
+    "author": "Art Institute of Chicago <engineering@artic.edu>",
+    "contributors": [
+        "Dylan Irlbeck <dylanirlbeck@gmail.com>",
+        "Abdur Khan <a_khan39@live.com>"
+    ],
+    "license": "AGPL-3.0",
+    "devDependencies": {
+        "husky": "^4.2.5",
+        "prettier": "2.0.5",
+        "pretty-quick": "^2.0.1"
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "pretty-quick --staged"
+        }
+    }
+}

@@ -54,7 +54,7 @@
         // https://developer.mozilla.org/en-US/docs/Web/API/Storage/getItem
         // ...returns `null` if not found. JSON.parsing `null` also returns `null`
         let savedResponse = JSON.parse(localStorage.getItem(savedResponseKey));
-        let savedOptions = JSON.parse(localStorage.savedOptionsKey);
+        let savedOptions = JSON.parse(localStorage.getItem(savedOptionsKey));
 
         chrome.storage.sync.get(
             {

@@ -16,8 +16,9 @@ function save_options(event) {
     // Prevent the form from refreshing the page
     event.preventDefault();
 
-    var dateRangeFrom = dateRangeFromInput.value;
-    var dateRangeTo = dateRangeToInput.value;
+    var dateRangeFrom = dateRangeFromInput.value || null;
+    var dateRangeTo = dateRangeToInput.value || null;
+
     chrome.storage.sync.set(
         {
             dateRangeFrom,

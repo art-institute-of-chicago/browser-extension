@@ -1,6 +1,7 @@
 (function () {
     // LocalStorage keys for reference
     const savedResponseKey = 'response';
+    const savedOptionsKey = 'extension_options';
     const preloadedImagesKey = 'preloaded';
     const preloadingImagesKey = 'preloading';
 
@@ -52,14 +53,8 @@
 
         // https://developer.mozilla.org/en-US/docs/Web/API/Storage/getItem
         // ...returns `null` if not found. JSON.parsing `null` also returns `null`
-        //let savedResponse = JSON.parse(localStorage.getItem(savedResponseKey));
-        savedResponse = null;
-
-        if (savedResponse !== null) {
-            if (savedResponse.data.length > 0) {
-                return processResponse(savedResponse);
-            }
-        }
+        let savedResponse = JSON.parse(localStorage.getItem(savedResponseKey));
+        let savedOptions = JSON.parse(localStorage.savedOptionsKey);
 
         chrome.storage.sync.get(
             {
@@ -67,7 +62,14 @@
                 dateRangeTo: String(new Date().getFullYear()),
             },
             function (options) {
-                getJson('https://api.artic.edu/api/v1/search', getQuery(options), processResponse);
+                if (JSON.stringify(options) !== JSON.stringify(savedOptions)) {
+                    localStorage.setItem(savedOptionsKey, JSON.stringify(options));
+                    getJson('https://api.artic.edu/api/v1/search', getQuery(options), processResponse);
+                } else if (savedResponse?.data?.length > 0) {
+                    return processResponse(savedResponse);
+                } else {
+                    getJson('https://api.artic.edu/api/v1/search', getQuery(), processResponse);
+                }
             }
         );
     });

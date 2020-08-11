@@ -1,7 +1,23 @@
+const currentYear = new Date().getFullYear();
+
+document.addEventListener('DOMContentLoaded', restore_options);
+const filterForm = document.getElementById('filter-form');
+filterForm.addEventListener('submit', save_options);
+
+const dateRangeFromInput = document.getElementById('dateRangeFrom');
+dateRangeFromInput.max = currentYear;
+
+const dateRangeToInput = document.getElementById('dateRangeTo');
+dateRangeToInput.placeholder = `Max: ${currentYear}`;
+dateRangeToInput.max = currentYear;
+
 // Saves options to chrome.storage
-function save_options() {
-    var dateRangeFrom = document.getElementById("dateRangeFrom").value;
-    var dateRangeTo = document.getElementById("dateRangeTo").value;
+function save_options(event) {
+    // Prevent the form from refreshing the page
+    event.preventDefault();
+
+    var dateRangeFrom = dateRangeFromInput.value;
+    var dateRangeTo = dateRangeToInput.value;
     chrome.storage.sync.set(
         {
             dateRangeFrom,
@@ -23,54 +39,12 @@ function save_options() {
 function restore_options() {
     chrome.storage.sync.get(
         {
-            dateRangeFrom: "-8000",
-            dateRangeTo: "2020"
+            dateRangeFrom: '-8000',
+            dateRangeTo: currentYear,
         },
-        function(items) {
-            document.getElementById("dateRangeFrom").value =
-                items.dateRangeFrom;
-            document.getElementById("dateRangeTo").value = items.dateRangeTo;
+        function (items) {
+            dateRangeFromInput.value = items.dateRangeFrom;
+            dateRangeToInput.value = items.dateRangeTo;
         }
     );
 }
-
-function validateDateInputs() {
-    const dateRangeFromInput = document.getElementById("dateRangeFrom");
-    const dateRangeToInput = document.getElementById("dateRangeTo");
-
-    const dateRangeFrom = Number(dateRangeFromInput.value);
-    const dateRangeTo = Number(dateRangeToInput.value);
-
-    if (dateRangeFrom < -8000) {
-        dateRangeFromInput.style.borderColor = "red";
-        return false;
-    } else if (dateRangeFrom > dateRangeTo) {
-        dateRangeFromInput.style.borderColor = "red";
-        dateRangeToInput.style.borderColor = "red";
-        return false;
-    } else if (dateRangeTo < -8000 || dateRangeTo > new Date().getFullYear()) {
-        dateRangeToInput.style.borderColor = "red";
-        return false;
-    }
-    dateRangeFromInput.style.borderColor = "initial";
-    dateRangeToInput.style.borderColor = "initial";
-    return true;
-}
-
-function validate() {
-    if (!validateDateInputs()) {
-        document.getElementById("submit-button").disabled = true;
-        return;
-    }
-
-    document.getElementById("submit-button").disabled = false;
-}
-
-document.addEventListener("DOMContentLoaded", restore_options);
-document
-    .getElementById("submit-button")
-    .addEventListener("click", save_options);
-
-document.getElementById("dateRangeFrom").addEventListener("change", validate);
-
-document.getElementById("dateRangeTo").addEventListener("change", validate);

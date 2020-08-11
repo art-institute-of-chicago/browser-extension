@@ -21,14 +21,14 @@ function save_options(event) {
     chrome.storage.sync.set(
         {
             dateRangeFrom,
-            dateRangeTo
+            dateRangeTo,
         },
-        function() {
+        function () {
             // Update status to let user know options were saved.
-            var status = document.getElementById("filter-status");
-            status.textContent = "Options saved!";
-            setTimeout(function() {
-                status.textContent = "";
+            var status = document.getElementById('filter-status');
+            status.textContent = 'Options saved!';
+            setTimeout(function () {
+                status.textContent = '';
             }, 1000);
         }
     );

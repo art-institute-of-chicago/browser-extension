@@ -6,7 +6,7 @@
     "author": "Art Institute of Chicago",
     "options_ui": {
         "page": "options.html",
-        "open_in_tab": false
+        "open_in_tab": true
     },
     "browser_action": {
         "default_icon": "assets/logo--icon--16.png",

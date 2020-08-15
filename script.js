@@ -63,11 +63,14 @@
             },
             function (options) {
                 if (JSON.stringify(options) !== JSON.stringify(savedOptions)) {
+                    // Refresh the saved options
                     localStorage.setItem(savedOptionsKey, JSON.stringify(options));
                     getJson('https://api.artic.edu/api/v1/search', getQuery(options), processResponse);
                 } else if (savedResponse?.data?.length > 0) {
+                    // Use the saved (aka cached) response
                     return processResponse(savedResponse);
                 } else {
+                    // Fail-safe
                     getJson('https://api.artic.edu/api/v1/search', getQuery(options), processResponse);
                 }
             }

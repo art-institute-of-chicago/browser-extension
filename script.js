@@ -68,7 +68,7 @@
                 } else if (savedResponse?.data?.length > 0) {
                     return processResponse(savedResponse);
                 } else {
-                    getJson('https://api.artic.edu/api/v1/search', getQuery(), processResponse);
+                    getJson('https://api.artic.edu/api/v1/search', getQuery(options), processResponse);
                 }
             }
         );
@@ -240,7 +240,6 @@
     }
 
     function getQuery(options) {
-        console.log('OPTIONS', options);
         return {
             resources: 'artworks',
             fields: ['id', 'title', 'artist_title', 'image_id', 'date_display', 'thumbnail'],

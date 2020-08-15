@@ -122,15 +122,13 @@
                 return el != null;
             })
             .join(', ');
+
         let titlePrint = artwork.title ? artwork.title : '';
 
-        let linkToArtwork =
-            'https://www.artic.edu/artworks/' +
-            artwork.id +
-            '/' +
-            slugify(titlePrint) +
-            '?utm_medium=chrome-extension&utm_source=' +
-            titlePrint;
+        let linkToArtwork = 'https://www.artic.edu/artworks/' + artwork.id + '/' + slugify(titlePrint);
+
+        // Track referrals from the extension in analytics
+        linkToArtwork += '?utm_medium=chrome-extension&utm_source=' + titlePrint;
 
         artistElement.innerHTML = artistPrint;
         titleElement.innerHTML = titlePrint;
@@ -242,7 +240,15 @@
     function getQuery(options) {
         return {
             resources: 'artworks',
-            fields: ['id', 'title', 'artist_title', 'image_id', 'date_display', 'thumbnail'],
+            // prettier-ignore
+            fields: [
+                'id',
+                'title',
+                'artist_title',
+                'image_id',
+                'date_display',
+                'thumbnail',
+            ],
             boost: false,
             limit: artworksToPrefetch,
             query: {

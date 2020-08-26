@@ -60,7 +60,7 @@
             }
         }
 
-        getJson('https://aggregator-data.artic.edu/api/v1/search', getQuery(), processResponse);
+        getJson('https://api.artic.edu/api/v1/search', getQuery(), processResponse);
     });
 
     function getJson(url, body, callback) {

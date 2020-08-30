@@ -16,8 +16,16 @@ function save_options(event) {
     // Prevent the form from refreshing the page
     event.preventDefault();
 
-    var dateRangeFrom = dateRangeFromInput.value || null;
-    var dateRangeTo = dateRangeToInput.value || null;
+    var dateRangeFrom = dateRangeFromInput.value;
+    var dateRangeTo = dateRangeToInput.value;
+
+    if (dateRangeFrom === '') {
+        dateRangeFrom = '-8000';
+    }
+
+    if (dateRangeTo === '') {
+        dateRangeTo = currentYear;
+    }
 
     chrome.storage.sync.set(
         {

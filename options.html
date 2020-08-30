@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="options.css" />
+    </head>
+    <body>
+        <form id="filter-form">
+            <div>
+                <div class="filter-option">
+                    <div class="filter-option-header">
+                        <span>Date</span>
+                    </div>
+                    <p class="filter-option-description">
+                        Specify the date range of the generated artwork (in years)
+                    </p>
+                    <div class="filter-option-row">
+                        <input
+                            type="number"
+                            min="-8000"
+                            placeholder="Min: -8000"
+                            id="dateRangeFrom"
+                            name="rangeFrom"
+                            class="date-input"
+                        />
+                        <input type="number" min="-8000" id="dateRangeTo" name="rangeTo" class="date-input" />
+                    </div>
+                </div>
+            </div>
+            <div id="filter-footer">
+                <button id="submit-button" form="filter-form" type="submit">OK</button>
+            </div>
+            <div id="filter-status"></div>
+        </form>
+    </body>
+    <script src="options.js"></script>
+</html>

@@ -1,6 +1,7 @@
 (function () {
     // LocalStorage keys for reference
     const savedResponseKey = 'response';
+    const savedOptionsKey = 'extension_options';
     const preloadedImagesKey = 'preloaded';
     const preloadingImagesKey = 'preloading';
 
@@ -53,14 +54,27 @@
         // https://developer.mozilla.org/en-US/docs/Web/API/Storage/getItem
         // ...returns `null` if not found. JSON.parsing `null` also returns `null`
         let savedResponse = JSON.parse(localStorage.getItem(savedResponseKey));
+        let savedOptions = JSON.parse(localStorage.getItem(savedOptionsKey));
 
-        if (savedResponse !== null) {
-            if (savedResponse.data.length > 0) {
-                return processResponse(savedResponse);
+        chrome.storage.sync.get(
+            {
+                dateRangeFrom: '-8000',
+                dateRangeTo: String(new Date().getFullYear()),
+            },
+            function (options) {
+                if (JSON.stringify(options) !== JSON.stringify(savedOptions)) {
+                    // Refresh the saved options
+                    localStorage.setItem(savedOptionsKey, JSON.stringify(options));
+                    getJson('https://api.artic.edu/api/v1/search', getQuery(options), processResponse);
+                } else if (savedResponse?.data?.length > 0) {
+                    // Use the saved (aka cached) response
+                    return processResponse(savedResponse);
+                } else {
+                    // Fail-safe
+                    getJson('https://api.artic.edu/api/v1/search', getQuery(options), processResponse);
+                }
             }
-        }
-
-        getJson('https://api.artic.edu/api/v1/search', getQuery(), processResponse);
+        );
     });
 
     function getJson(url, body, callback) {
@@ -124,11 +138,8 @@
         tombstoneElement.setAttribute('href', linkToArtwork);
 
         var downloadUrl = 'https://www.artic.edu/iiif/2/' + artwork.image_id + '/full/3000,/0/default.jpg';
-
         document.getElementById('download-link').setAttribute('href', downloadUrl);
-
         document.getElementById('download-link').setAttribute('download', titlePrint + '.jpg');
-
         document.getElementById('artwork-url').setAttribute('href', linkToArtwork);
 
         // Work-around for saving canvas images with white borders
@@ -229,7 +240,7 @@
         });
     }
 
-    function getQuery() {
+    function getQuery(options) {
         return {
             resources: 'artworks',
             // prettier-ignore
@@ -248,6 +259,20 @@
                     query: {
                         bool: {
                             filter: [
+                                {
+                                    range: {
+                                        date_start: {
+                                            gte: Number(options.dateRangeFrom),
+                                        },
+                                    },
+                                },
+                                {
+                                    range: {
+                                        date_end: {
+                                            lte: Number(options.dateRangeTo),
+                                        },
+                                    },
+                                },
                                 {
                                     term: {
                                         is_public_domain: true,

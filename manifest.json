@@ -12,7 +12,6 @@
     "chrome_url_overrides": {
         "newtab": "index.html"
     },
-    "permissions": ["activeTab"],
     "icons": {
         "16": "assets/logo--icon--16.png",
         "48": "assets/logo--icon--48.png",

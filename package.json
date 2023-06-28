@@ -1,6 +1,6 @@
 {
     "name": "browser-extension",
-    "version": "1.4",
+    "version": "1.5",
     "main": "index.js",
     "repository": "https://github.com/art-institute-of-chicago/browser-extension.git",
     "author": "Art Institute of Chicago <engineering@artic.edu>",

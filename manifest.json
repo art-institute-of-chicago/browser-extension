@@ -1,7 +1,7 @@
 {
     "manifest_version": 3,
     "name": "Art Institute of Chicago: Art Tab",
-    "version": "1.4",
+    "version": "1.5",
 
     "action": {
         "default_icon": {

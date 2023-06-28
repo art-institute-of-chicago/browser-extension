@@ -1,12 +1,15 @@
 {
     "name": "browser-extension",
-    "version": "1.0.0",
+    "version": "1.4",
     "main": "index.js",
     "repository": "https://github.com/art-institute-of-chicago/browser-extension.git",
     "author": "Art Institute of Chicago <engineering@artic.edu>",
     "contributors": [
         "Dylan Irlbeck <dylanirlbeck@gmail.com>",
-        "Abdur Khan <a_khan39@live.com>"
+        "Abdur Khan <a_khan39@live.com>",
+        "Illya Moskvin <ivmoskvin@gmail.com>",
+        "Tina Shah <tinashah8@gmail.com>",
+        "nikhil trivedi <ntrivedi@artic.edu>"
     ],
     "license": "AGPL-3.0",
     "devDependencies": {

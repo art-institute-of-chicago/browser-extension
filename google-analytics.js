@@ -1,8 +1,8 @@
 const GA_ENDPOINT = 'https://www.google-analytics.com/mp/collect';
 const GA_DEBUG_ENDPOINT = 'https://www.google-analytics.com/debug/mp/collect';
 
-const MEASUREMENT_ID = 'G-L4S7N7GSLD';
-const API_SECRET = 'HRLBWZUGTRu5-Mjqd2ZgIQ';
+const MEASUREMENT_ID = 'G-ZJZ7R8RXRQ';
+const API_SECRET = 'Z1OzBT7jSLSp0p42ufgSQw';
 const DEFAULT_ENGAGEMENT_TIME_MSEC = 100;
 
 // Duration of inactivity after which a new session is created

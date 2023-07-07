@@ -1,20 +1,26 @@
 {
-    "manifest_version": 2,
+    "manifest_version": 3,
     "name": "Art Institute of Chicago: Art Tab",
-    "description": "Sneak some inspiration into your day. See a new, random artwork from the museum's vast collection every time you open a new tab.",
-    "version": "1.4",
-    "author": "Art Institute of Chicago",
-    "browser_action": {
-        "default_icon": "assets/logo--icon--16.png",
+    "version": "1.5",
+
+    "action": {
+        "default_icon": {
+            "16": "assets/logo--icon--16.png",
+            "48": "assets/logo--icon--48.png",
+            "128": "assets/logo--icon--128.png"
+        },
         "default_title": "Art Institute of Chicago"
     },
-    "content_security_policy": "script-src 'self' unsafe-inline https://cdn.jsdelivr.net https://ssl.google-analytics.com; object-src 'self'",
-    "chrome_url_overrides": {
-        "newtab": "index.html"
-    },
+    "description": "Sneak some inspiration into your day. See a new, random artwork from the museum's vast collection every time you open a new tab.",
     "icons": {
         "16": "assets/logo--icon--16.png",
         "48": "assets/logo--icon--48.png",
         "128": "assets/logo--icon--128.png"
-    }
+    },
+
+    "author": "Art Institute of Chicago",
+    "chrome_url_overrides": {
+        "newtab": "index.html"
+    },
+    "permissions": ["storage"]
 }

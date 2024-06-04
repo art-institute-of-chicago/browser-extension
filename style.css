@@ -165,3 +165,23 @@ body {
 .openseadragon-canvas {
     outline: none;
 }
+
+@media (prefers-color-scheme: dark) {
+
+    body {
+      background: #21212c;
+      color: lightgrey;
+    }
+
+    #tombstone #title {
+      color: lightgrey;
+    }
+
+    #tombstone #artist {
+        color: lightgrey;
+    }
+
+    #logo img {
+        filter: invert(0.87);
+    }
+}

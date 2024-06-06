@@ -50,6 +50,49 @@ body {
     opacity: 0;
 }
 
+#reload-container {
+    position: absolute;
+    bottom: calc(var(--spacing) * 4);
+    right: var(--spacing);
+
+    display: flex;
+    align-items: flex-end;
+}
+
+#reload-container > * {
+    display: block;
+}
+
+#reload-container #reload-link {
+    margin-left: calc(var(--spacing) / 2);
+
+    width: 48px;
+    height: 48px;
+
+    text-align: center;
+    cursor: pointer;
+
+    transition-property: background-color;
+    transition-duration: 0.15s;
+    transition-timing-function: ease-in-out;
+
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+#reload-container #reload-link:hover {
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+#reload-container #reload-link img {
+    top: 24px;
+    position: relative;
+    margin: -1px auto 0;
+    transform: translateY(-50%);
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+}
+
 #download-container {
     position: absolute;
     bottom: var(--spacing);
@@ -146,7 +189,7 @@ body {
     /*text-shadow: 0px 0px 2px black;*/
 }
 
-#tombstone #title a:hover {
+a#tombstone:hover {
     color: gray;
     text-decoration: underline;
 }
@@ -183,5 +226,18 @@ body {
 
     #logo img {
         filter: invert(0.87);
+    }
+
+    #reload-container #reload-link:hover {
+        filter: invert(0.87);
+    }
+
+    #download-container #download-link:hover {
+        filter: invert(0.87);
+    }
+
+    a#tombstone:hover {
+        color: lightgrey;
+        text-decoration: underline;
     }
 }

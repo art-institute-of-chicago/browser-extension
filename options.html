@@ -1,39 +1,22 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <title>Art Institute of Chicago: Art Tab - Options</title>
-    <style>
-        body {
-            background: #21212c;
-            color: lightgrey;
-            font-family: sans-serif;
-            font-size: 16px;
-            padding: 0 32px;
-        }
-        label, select {
-            font-size: 24px;
-        }
-        select {
-            margin: 0 24px;
-        }
-        .setting {
-            margin: 24px 0;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="options.css" />
   </head>
   <body>
     <h1>Art Institute of Chicago: Art Tab - Options</h1>
-    <hr>
-    <div class="setting">
-        <label for="daily">Daily mode:</label>
+    <fieldset class="setting">
+        <legend>Daily mode</legend>
         <select id="daily">
-          <option value="false" selected>No</option>
-          <option value="true">Yes</option>
-        </select>
-        <span>Reload artwork image once per day instead of on every new tab</span>
-    </div>
-    <hr>
-
-    <script src="options.js"></script>
+            <option value="false" selected>No</option>
+            <option value="true">Yes</option>
+          </select>
+          <span>Reload artwork image once per day instead of on every new tab</span>
+    </fieldset>
+    <fieldset class="setting" id="departments">
+        <legend>Department Filter</legend>
+    </fieldset>
+    <script src="options.js" type="module"></script>
   </body>
 </html>

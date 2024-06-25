@@ -1,12 +1,21 @@
-(function () {
-    // LocalStorage keys for reference
-    const savedResponseKey = 'response';
-    const preloadedImagesKey = 'preloaded';
-    const preloadingImagesKey = 'preloading';
-    const lastLoadedDateKey = 'lastLoadedDate'
-    const extensionSettingsKey = 'extensionSettings';
+// prettier-ignore
+import {
+    artworkCacheKeys,
+    filterFields,
+    getJson,
+    getStoredSettings,
+    noDepartmentTerm
+} from './lib.js';
 
-    const settings = JSON.parse(localStorage.getItem(extensionSettingsKey)) || {};
+(function () {
+
+    // prettier-ignore
+    const {
+        savedResponseKey,
+        preloadedImagesKey,
+        preloadingImagesKey,
+        lastLoadedDateKey
+    } = artworkCacheKeys;
 
     // Settings for cache aggressiveness
     const artworksToPrefetch = 50;
@@ -64,12 +73,12 @@
     function handleReload(e) {
         // handle keyboard interaction
         if (e.type === 'click' || (e.type === 'keypress' && (e.key === 'Enter' || e.key === ' '))) {
-          e.preventDefault();
-          loadNewArtwork(true);
+            e.preventDefault();
+            loadNewArtwork(true);
         }
-      }
+    }
 
-    function loadNewArtwork(forceNew){
+    function loadNewArtwork(forceNew) {
         // https://developer.mozilla.org/en-US/docs/Web/API/Storage/getItem
         // ...returns `null` if not found. JSON.parsing `null` also returns `null`
         let savedResponse = JSON.parse(localStorage.getItem(savedResponseKey));
@@ -80,19 +89,7 @@
             }
         }
 
-        getJson('https://api.artic.edu/api/v1/search', getQuery(), processResponse, forceNew);
-    }
-
-    function getJson(url, body, callback, forceNew) {
-        let request = new XMLHttpRequest();
-        request.open('POST', url, true);
-        request.setRequestHeader('Content-Type', 'application/json');
-        request.onreadystatechange = function () {
-            if (this.readyState === 4 && this.status === 200) {
-                callback(JSON.parse(this.responseText), forceNew);
-            }
-        };
-        request.send(JSON.stringify(body));
+        getJson(getQuery(), processResponse, forceNew);
     }
 
     /**
@@ -101,16 +98,15 @@
     function processResponse(response, forceNew) {
         let artwork = response.data[0];
 
-        const dateNow = (new Date()).toLocaleDateString();
+        const dateNow = new Date().toLocaleDateString();
         const lastLoaded = localStorage.getItem(lastLoadedDateKey);
 
-        if(!settings.dailyMode || forceNew || lastLoaded !== dateNow) {
-            localStorage.setItem(lastLoadedDateKey, (new Date()).toLocaleDateString());
+        if (!getStoredSettings().dailyMode || forceNew || lastLoaded !== dateNow) {
+            localStorage.setItem(lastLoadedDateKey, new Date().toLocaleDateString());
             response.data = response.data.slice(1);
             artwork = response.data[0];
-        }
-        else {
-          // artwork was loaded on today's date, don't load a new one
+        } else {
+            // artwork was loaded on today's date, don't load a new one
         }
 
         localStorage.setItem(savedResponseKey, JSON.stringify(response));
@@ -188,8 +184,7 @@
         // Save this so we can add it to our preload log
         let currentImageId = artwork.image_id;
 
-        if(!isPreload)
-        {
+        if (!isPreload) {
             // clear out any previous
             viewer.world.removeAll();
         }
@@ -268,7 +263,7 @@
     }
 
     function getQuery() {
-        return {
+        const query = {
             resources: 'artworks',
             // prettier-ignore
             fields: [
@@ -278,6 +273,7 @@
                 'image_id',
                 'date_display',
                 'thumbnail',
+                'department_title',
             ],
             boost: false,
             limit: artworksToPrefetch,
@@ -317,6 +313,26 @@
                 },
             },
         };
+
+        const settings = getStoredSettings();
+
+        if (settings.departmentOptions.selected.length > 0) {
+            const filter = { bool: { should: [] } };
+            settings.departmentOptions.selected.forEach((o) => {
+                if (o === noDepartmentTerm) {
+                    filter.bool.should.push({
+                        bool: { must_not: [{ exists: { field: 'department_title.keyword' } }] },
+                    });
+                } else {
+                    const term = { term: {} };
+                    term.term[filterFields.department] = o;
+                    filter.bool.should.push(term);
+                }
+            });
+            query.query.function_score.query.bool.filter.push(filter);
+        }
+
+        return query;
     }
 
     /**

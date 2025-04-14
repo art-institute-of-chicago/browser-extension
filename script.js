@@ -1,8 +1,21 @@
+// prettier-ignore
+import {
+    artworkCacheKeys,
+    filterFields,
+    getJson,
+    getStoredSettings,
+    noDepartmentTerm
+} from './lib.js';
+
 (function () {
-    // LocalStorage keys for reference
-    const savedResponseKey = 'response';
-    const preloadedImagesKey = 'preloaded';
-    const preloadingImagesKey = 'preloading';
+
+    // prettier-ignore
+    const {
+        savedResponseKey,
+        preloadedImagesKey,
+        preloadingImagesKey,
+        lastLoadedDateKey
+    } = artworkCacheKeys;
 
     // Settings for cache aggressiveness
     const artworksToPrefetch = 50;
@@ -50,37 +63,52 @@
             showSequenceControl: false,
         });
 
+        loadNewArtwork(false);
+
+        const reloadLink = document.getElementById('reload-link');
+        reloadLink.addEventListener('click', handleReload);
+        reloadLink.addEventListener('keypress', handleReload);
+    });
+
+    function handleReload(e) {
+        // handle keyboard interaction
+        if (e.type === 'click' || (e.type === 'keypress' && (e.key === 'Enter' || e.key === ' '))) {
+            e.preventDefault();
+            loadNewArtwork(true);
+        }
+    }
+
+    function loadNewArtwork(forceNew) {
         // https://developer.mozilla.org/en-US/docs/Web/API/Storage/getItem
         // ...returns `null` if not found. JSON.parsing `null` also returns `null`
         let savedResponse = JSON.parse(localStorage.getItem(savedResponseKey));
 
         if (savedResponse !== null) {
             if (savedResponse.data.length > 0) {
-                return processResponse(savedResponse);
+                return processResponse(savedResponse, forceNew);
             }
         }
 
-        getJson('https://api.artic.edu/api/v1/search', getQuery(), processResponse);
-    });
-
-    function getJson(url, body, callback) {
-        let request = new XMLHttpRequest();
-        request.open('POST', url, true);
-        request.setRequestHeader('Content-Type', 'application/json');
-        request.onreadystatechange = function () {
-            if (this.readyState === 4 && this.status === 200) {
-                callback(JSON.parse(this.responseText));
-            }
-        };
-        request.send(JSON.stringify(body));
+        getJson(getQuery(), processResponse, forceNew);
     }
 
     /**
      * Remove one artwork from the response and save it to LocalStorage.
      */
-    function processResponse(response) {
+    function processResponse(response, forceNew) {
         let artwork = response.data[0];
-        response.data = response.data.slice(1);
+
+        const dateNow = new Date().toLocaleDateString();
+        const lastLoaded = localStorage.getItem(lastLoadedDateKey);
+
+        if (!getStoredSettings().dailyMode || forceNew || lastLoaded !== dateNow) {
+            localStorage.setItem(lastLoadedDateKey, new Date().toLocaleDateString());
+            response.data = response.data.slice(1);
+            artwork = response.data[0];
+        } else {
+            // artwork was loaded on today's date, don't load a new one
+        }
+
         localStorage.setItem(savedResponseKey, JSON.stringify(response));
 
         // Remove any artwork not in left-over response from preloaded trackers
@@ -156,6 +184,11 @@
         // Save this so we can add it to our preload log
         let currentImageId = artwork.image_id;
 
+        if (!isPreload) {
+            // clear out any previous
+            viewer.world.removeAll();
+        }
+
         // https://openseadragon.github.io/docs/OpenSeadragon.Viewer.html#addTiledImage
         viewer.addTiledImage({
             tileSource: {
@@ -230,7 +263,7 @@
     }
 
     function getQuery() {
-        return {
+        const query = {
             resources: 'artworks',
             // prettier-ignore
             fields: [
@@ -240,6 +273,7 @@
                 'image_id',
                 'date_display',
                 'thumbnail',
+                'department_title',
             ],
             boost: false,
             limit: artworksToPrefetch,
@@ -279,6 +313,26 @@
                 },
             },
         };
+
+        const settings = getStoredSettings();
+
+        if (settings.departmentOptions.selected.length > 0) {
+            const filter = { bool: { should: [] } };
+            settings.departmentOptions.selected.forEach((o) => {
+                if (o === noDepartmentTerm) {
+                    filter.bool.should.push({
+                        bool: { must_not: [{ exists: { field: 'department_title.keyword' } }] },
+                    });
+                } else {
+                    const term = { term: {} };
+                    term.term[filterFields.department] = o;
+                    filter.bool.should.push(term);
+                }
+            });
+            query.query.function_score.query.bool.filter.push(filter);
+        }
+
+        return query;
     }
 
     /**

@@ -22,5 +22,10 @@
     "chrome_url_overrides": {
         "newtab": "index.html"
     },
-    "permissions": ["storage"]
+    "permissions": ["storage"],
+    "browser_specific_settings": {
+        "gecko": {
+            "id": "{63e9ecc7-596d-62ce-00bd-41c2fe3c7fcd}"
+        }
+    }
 }
